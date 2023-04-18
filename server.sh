@@ -1,0 +1,1 @@
+java -Xmx2048m -classpath lib/momime-server-0.9.9.7.jar:$(cat lib/classpaths/server-classpath-unix.txt) momime.server.MomServerKickOff server

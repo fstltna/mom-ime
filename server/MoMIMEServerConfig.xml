@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config:momImeServerConfig xmlns:config="http://momime/server/config">
+	<portNumber>18250</portNumber>
+	<compressDataSentToClient>true</compressDataSentToClient>
+	<decompressDataReceivedFromClient>true</decompressDataReceivedFromClient>
+	<userRegistryFilename>server/userRegistry/MoMIMEServerUserRegistry.xml</userRegistryFilename>
+	<pathToServerXmlDatabases>server/databases</pathToServerXmlDatabases>
+	<pathToSavedGames>server/savedGames</pathToSavedGames>
+	<savePointKeepCount>16</savePointKeepCount>
+</config:momImeServerConfig>

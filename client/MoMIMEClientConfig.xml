@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:momImeClientConfig xmlns:ns2="http://momime/client/config">
+    <compressDataSentToServer>true</compressDataSentToServer>
+    <decompressDataReceivedFromServer>true</decompressDataReceivedFromServer>
+    <graphicsXmlFilename>client/graphics/Graphics.momime.xml</graphicsXmlFilename>
+    <languagesXmlFilename>client/languages/Languages.momime.xml</languagesXmlFilename>
+    <chosenLanguage>en</chosenLanguage>
+    <overlandSmoothTerrain>true</overlandSmoothTerrain>
+    <overlandSmoothTextures>false</overlandSmoothTextures>
+    <overlandShowPartialFogOfWar>true</overlandShowPartialFogOfWar>
+    <overlandSmoothFogOfWar>true</overlandSmoothFogOfWar>
+    <overlandShowOurBorder>false</overlandShowOurBorder>
+    <overlandShowEnemyBorders>false</overlandShowEnemyBorders>
+    <overlandAnimateUnitsMoving>true</overlandAnimateUnitsMoving>
+    <combatSmoothTerrain>true</combatSmoothTerrain>
+    <showHeroPortraits>true</showHeroPortraits>
+    <displayUnitSkillsAsAttributes>A</displayUnitSkillsAsAttributes>
+    <debugShowURNs>false</debugShowURNs>
+    <debugShowEdgesOfMap>false</debugShowEdgesOfMap>
+</ns2:momImeClientConfig>

@@ -1,0 +1,1740 @@
+<HTML>
+<HEAD>
+	<TITLE>Master of Magic - Implode's Multiplayer Edition Version History</TITLE>
+</HEAD>
+<link rel="stylesheet" type="text/css" href="mom.css" />
+<BODY>
+	<h2>Master of Magic - Implode's Multiplayer Edition Version History</h2>
+
+	<h3>Introduction</h3>
+	<p>This is the start of an attempt at an open source Java-based Multiplayer Client/Server edition of Microprose/Simtex's classic
+		game 'Master of Magic'.  The project is now hosted <a href="http://sourceforge.net/projects/momime">on SourceForge</a>.</p>
+
+	<p>Since 0.9.5, you no longer need to have the original Master of Magic v1.31 installed to run the Client, and no configuration is necessary,
+		just download it, unzip it and run the .bat files.  All you do require is a Java 11 which is easy to download and unzip, but requires a little more
+		work than older versions to configure it as there is no Windows installer to correctly set your PATH statement so you must do this yourself after
+		unzipping it.  On Windows, I suggest you <b>do not</b> unzip it into "C:\Program Files" or similar, or
+		MoM IME will have problems with lacking permission to update its config files and save games.</p>
+
+	<p>To get a game going, run the server.  There is nothing else to set up here, just get the server running, assuming it starts up successfully
+		it'll say "Listening for client connection requests on port 18250".  Then run the client, choose Connect to Server, and click 'localhost'
+		assuming you're running both on the same PC.  Enter a user ID and password - the first time you use it, tick 'This is a new account' - this
+		reserves your player name on your server.  After connecting, choose New Game and set options in a similar way to the original MoM
+		(you must add at least one human or AI opponent) and click OK, and proceed through the rest of the normal game setup like choosing a wizard, picks, race and so on.</p>
+		
+	<p>Now MoM IME is a pure Java application, it should now work on operating systems other than Windows.  It has been tested on some Linux distributions so
+		pretty sure things are generally fine there too, but obviously haven't exhaustively tested across all of them.  If anybody has issues with running on other operating
+		systems then please let me know so I can try to make improvements.</p>
+
+	<p>Come join our discord channel <a href="https://discord.gg/wFNQf36">here</a>, or contact the author at <a href="mailto:momime@hotmail.ca">momime@hotmail.ca</a>.</p>
+
+	<h3>Version History</h3>
+	<table border=1>
+		<tr>
+			<th align=left>Version</th>
+			<th align=left>Date</th>
+			<th align=left>Description</th>
+		</tr>
+		<tr>
+			<a name="currentversion"></a>
+			<td align=left><b>Current version: 0.9.9.7</b></td>
+			<td align=left><b>7 Nov 2011</b></td>
+			<td align=left>
+				<b>Rare spells that now work correctly:</b>
+				<ul>
+					<li>Ice Storm
+					<li>Earthquake
+					<li>Fixed bug with Move Fortress not also moving the Summoning Circle when it was also at the old Wizard's Fortress location
+					<li>Gaia's Blessing
+					<li>Fixed Banish so it can't be cast on normal units or heroes
+					<li>Stop being able to cast Mind Storm on units with True Sight / Illusions Immunity
+					<li>Stasis
+					<li>Warp Lightning (only fired a single strength 10 bolt before)
+					<li>Metal Fires
+					<li>Magic Vortex
+					<li>Fire Storm
+					<li>Chaos Rift
+					<li>Invulnerability previously granted Weapon Immunity; now added the -2 damage reduction as well
+					<li>Righteousness
+					<li>Prosperity
+					<li>Altar of Battle
+					<li>Stream of Life
+					<li>Wrack
+					<li>Evil Presence
+					<li>Warp Node
+					<li>Black Wind
+					<li>Zombie Mastery
+					<li>Famine
+					<li>Cursed Lands
+				</ul>
+
+				<b>Fixes to common and uncommon spells:</b>
+				<ul>
+					<li>Allowed casting Corruption on Nodes.  Its not totally clear from the wiki whether this was intended to be allowed in the original MoM or not.
+					<li>Stop being able to cast Weakness, Black Sleep or Possession on units with Death Immunity or Righteousness
+					<li>Stop being able to cast Vertigo on units with True Sight / Illusions Immunity
+				</ul>
+
+				<b>Other new features:</b>
+				<ul>
+					<li>Added overfarming rule to Rations calculation
+					<li>Added button to overland map view to access damage calculator, so you can see results of overland damage spells like Ice Storm
+					<li>Rewritten the way Combat Area Effects (like node auras or prayer) grant bonus stats, to enable defining what effects do not stack with other effects.  Metal Fires will not stack with Flame Blade.
+High Prayer to not stack with Prayer.  Darkness, Cloud of Shadow and Eternal Night will not stack.  True Light will not stack with Heavenly Light.
+					<li>Allowed casting Corruption on Nodes.  Its not totally clear whether this was intended to be allowed in the original MoM or not.
+					<li>Made calculator and damage breakdown screens much wider as some of the long descriptions would be wider than the screen and make a horizontal scroll bar appear.
+				</ul>
+
+				<b>AI adjustments:</b>
+				<ul>
+					<li>AI players (both wizards and raiders) no longer get a boost to generation of rations based on difficulty level (boost now applies only to production, gold and magic power generated from cities)
+					<li>AI players now decide what proportion of magic power to split into mana, spell research and skill improvment, rather than leaving it at the default 1/3 split
+					<li>Decreased value rating of wild game and increased value rating of Mithril ore, so you are less likely to get a start position
+						surrounded by 4 wild game which was common, and more likely to get a start position with a Mithril ore deposit
+				</ul>
+
+				<b>Damage type adjustments:</b>
+				<ul>
+					<li>Magic Immunity now completely blocks Psionic blast, various lightning spells and Doom Bolt rather than just giving 50 shields (thanks andrei for pointing this out)
+					<li>Ranged boulder attacks (e.g. Warships, Steam Cannons) downgraded to normal damage so they do trigger the defence 10 from Weapon Immunity (this changed on wiki since I originally wrote it)
+					<li>Holy Word downgraded to deal healable damage instead of permanent
+					<li>Word of Death changed to deal death damage, so it is healable instead of permanent, and is blocked by Death Immunity and Righteousness
+					<li>Added new "Chaos damage" type to differentiate between spells that are blocked by Righteousness and those that aren't (e.g. Psionic Blast vs Lightning Bolt)
+				</ul>
+
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Fixed bug introduced in 0.9.9.5 where if an attacker won a combat, was told some of the dead defenders units were turned into undead, then those undead would be immediately killed off
+					<li>Stopped being able to instant cast overland spells during another player's turn
+					<li>Stopped AI players (and human players putting combats on auto) being able to aim spells at invisible units they can't see (thanks andrei for pointing this out)
+					<li>Corrected bonuses granted by Prayer and High Prayer in line with wiki
+					<li>In 0.9.9.0 Chaos/Sorcery/Nature mastery and Archmage made spells more difficult to dispel, but same had not been applied to Combat Area Effects
+					<li>Stop being able to close the combat screen from taskbar thereby locking up the game
+				</ul>
+			</tr>
+		<tr>
+		<tr>
+			<td align=left>0.9.9.6</td>
+			<td align=left>28 Sep 2021</td>
+			<td align=left>
+				<b>Uncommon spells that now work correctly:</b>
+				<ul>
+					<li>Detect Magic
+					<li>Flying and Non-corporeal units are now immune to Cracks Call; also Cracks Call now destroys sections of city wall and can be targeted directly on city walls
+					<li>Nature's Cures
+					<li>Change Terrain
+					<li>Transmute
+					<li>Blur
+					<li>Vertigo worked before, but updated so the blue swirl stays showing on the affected unit after casting
+					<li>Wind Mastery, and also updated description to be more accurate
+					<li>Raise Volcano
+					<li>Spell Blast
+					<li>Resurrection
+					<li>Planar Seal; also updated help text as the way this affects Towers of Wizardry is different from the original MoM
+					<li>Drain Power
+					<li>Possession
+					<li>Lycanthrophy
+					<li>Berserk
+					<li>Walls of Darkness
+				</ul>
+
+				<b>New features or fixes applicable to multiple spells:</b>
+				<ul>
+					<li>Hero items held by heroes killed by permanent damage (cracks call, petrify, disintegrate, stoning touch, etc) are lost rather than awarded to the winner of the combat
+				</ul>
+				
+				<b>Other new features:</b>
+				<ul>
+					<li>Wizards (F9) screen redesigned to accomodate Detect Magic, Spell Blast and other spells that require picking an enemy wizard to target
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Healing and Mass Healing now cannot be used on Death creatures or Undead (as per MoM wiki)
+					<li>Stopped client trying to show animation for "Raiders have been defeated" when their last city is taken
+					<li>Fixed batch files to run the editors which had broken version numbers in them
+					<li>Fixed more ways a game can end so the server ends the session cleanly
+					<li>Fixed sound effect for Earth Lore
+					<li>Fixed bug when someone starts casting Spell of Mastery, it would show the animation for it, and immediately show the animation for them finishing casting it and winning the game
+						(though game wouldn't end until they really did finish casting it and the animation would play again)
+				</ul>
+			</tr>
+		<tr>
+		<tr>
+			<td align=left>0.9.9.5</td>
+			<td align=left>17 Aug 2021</td>
+			<td align=left>
+				<b>Common spells that now work correctly:</b>
+				<ul>
+					<li>Web worked partially before, now
+					<ul>
+						<li>Added casting animation, sound, and image overlay
+						<li>HP of web displayed on unit info, and unit being stuck in it and damaging HP of the web each turn until it frees itself
+						<li>Non-corporeal units are immune to web
+						<li>Webs cannot be dispelled
+					</ul>
+					<li>Resist magic no longer displays +5 crosses on unit info as it doesn't apply in all situations; stopped benefit applying to poison damage
+					<li>Floating Islands can be summoned to any ocean tile and will not participate in any combats
+					<li>Confusion was castable before but had no effect, now
+					<ul>
+						<li>Units with Illusions Immunity or True Sight are immune to Confusion
+						<li>Rolls at the start of each combat turn to decide whether the unit does nothing, moves randomly, is controlled by the unit owner, or is controlled by the enemy
+					</ul>
+					<li>Warp Wood worked partially before but fixed up when it is and isn't valid to use
+					<li>Eldritch Weapon giving -1 to block to enemy unit now works; also negates Weapon Immunity (also applied to Flame Blade)
+					<li>Shatter now reduces most attacks to strength 1, and added animation on top of shattered units
+					<li>All 3 penalties from Warp Creature now work correctly
+					<li>Wall of Fire now works correctly and burns non-flying units if they move from outside the wall to inside, or try to attack across it
+					<li>+1 to hit from Holy Weapon now only applies to melee attacks, physical ranged attacks, and thrown weapons (and so it no longer shows on unit info screen)
+					<li>Heroism exp bonus now works correctly, is automatically dispelled when unit reaches 120 exp naturally, and cannot be cast on units who already have 120 exp
+					<li>Added animation for units affected by Weakness, and the -2 to ranged attack now only affects regular bows/slings, not boulder or magical ranged attacks
+					<li>Dark rituals now generates unrest and magic power, and reduces population growth
+					<li>Black sleep had minor adjustment to the way it negates movement and defence
+					<li>Terror now zeroes out movement allocation if the unit fails its resistance roll each combat turn
+					<li>Mana Leak now drains enemy wizard's MP, caster units' MP and ammunition of units with ranged magical attacks
+				</ul>
+
+				<b>New features or fixes applicable to multiple spells:</b>
+				<ul>
+					<li>Now get saving throw to resist unit curses, for example confusion or black sleep
+					<li>All unit curses with the exception of Web are now blocked by Magic Immunity
+					<li>Clarified the way saving throw modifiers to resistance based spells and attacks are held and fixed up this data on a lot of spells
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>After a successful Spell Binding, the client would have 2 copies of the spell, one with the old owner and one with the new owner
+					<li>Saving throw modifiers which are increased for specific magic realm creatures (e.g. Dispel Evil or Holy Word being more potent vs undead) are now applied consistently across all damage types
+					<li>Chance to Block cannot be reduced below 10% (though not sure if this is even possible)
+					<li>Stopped being able to cast Immolation on units that have it naturally (Doom Bats) for double effect
+					<li>+1 to hit from Magical, Mithril or Adamantium weapons now only applies to melee attacks, physical ranged attacks, and thrown weapons (and so it no longer shows on unit info screen)
+				</ul>
+				
+				<b>Text updates:</b>
+				<ul>
+					<li>Re-added in damage calculator showing Chance to Block on damage rolls, so you can see bonuses/penalities like High Prayer, Lucky or Eldritch Weapon are working correctly.
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.9.4</td>
+			<td align=left>16 Jul 2021</td>
+			<td align=left>
+				<b>Unit skills that now work correctly:</b>
+				<ul>
+					<li>Healer
+					<li>Regeneration
+					<li>Summon Demons
+					<li>Hydras' multiple heads
+					<li>Plane Shift
+					<li>Wall Crusher
+				</ul>
+
+				<b>Changes to combats:</b>
+				<ul>
+					<li>Cities are now 4x4 tiles like the original MoM (previously they were 5x5 to accomodate the 20 unit limit which was removed in 0.9.9.3)
+					<li>Units inside City Walls now get defensive bonus when being attacked by units outside the City Walls
+					<li>Each 2 units that attack a unit in the same combat round reduce that unit's To Hit chance when making counterattacks by 10% (as per MoM wiki)
+					<li>Cannot walk through the gate in City Walls diagonally
+				</ul>
+				
+				<b>Other new features:</b>
+				<ul>
+					<li>Units being in a city now boosts healing rate, and moreso if the city has an Animists' Guild
+					<li>When a unit has a fixed spell it can cast (e.g. Giant Spiders' web, Magicians' fireball, Priests' healing), right clicking the skill in their unit info panel now shows help for that spell
+					<li>AI players (and human players putting combats on Auto) will now cast unit fixed spells
+					<li>AI players (and human players putting combats on Auto) will now cast spells imbued in hero items
+					<li>Skills granted from hero item bonuses are now defined separately from base unit skills and skills granted from spells, so they appear with the correct brown background icons
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Permanent damage (e.g. from being turned to stone) will no longer heal each overland turn
+					<li>Units being turned into undead who lost some figures due to permanent damage will now become undead without regaining those figures
+					<li>Holy Avenger hero item attribute didn't add Dispels Evil 4, and Stoning hero item attribute didn't add Stoning Touch 1
+				</ul>
+				
+				<b>Text updates:</b>
+				<ul>
+					<li>Updated help text of Healer skill and Animsts' Guild to describe how healing rate each turn is calculated
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.9.3</td>
+			<td align=left>30 Jun 2021</td>
+			<td align=left>
+				<b>Unit skills that now work correctly:</b>
+				<ul>
+					<li>Invisible units in combat now appear semi-transparent if they can be seen (for example if you have a unit in adjacent cell or any unit in combat with True Sight) or completely hidden if you cannot see them
+					<li>Completely hidden units cannot be targeted by spells; semi-transparent units may be
+					<li>Both completely hidden units and semi-transparent units cannot be targeted by ranged attacks unless the attacker has True Sight/Illusions Immunity (another unit being able to see the enemy is not sufficient)
+					<li>Semi-transparent units are at -1 to hit with melee attacks or counterattacks
+					<li>Invisible units are hidden on the overland map, even if there are adjacent units with True Sight
+					<li>Teleporting
+					<li>Merging
+				</ul>
+
+				<b>Spells that now work correctly:</b>
+				<ul>
+					<li>Mass Invisibility now acts like all units in combat have Invisibility cast on them
+					<li>Black Sleep and Web now negate Flight, so flying units that are asleep or webbed in combat can be attacked by ground units
+				</ul>
+				
+				<b>Other new features:</b>
+				<ul>
+					<li>In simultaneous turns games, now tells you the difference between waiting for other players to allocate moves, and when all players have allocated moves and waiting for the server to process them
+					<li>AI will now make multiple moves or attacks with the same unit in combat if it can
+					<li>Select units buttons on the overland map and city screens are now considerably larger so its easier to see which unit it is; city screen button layout changed a bit to accomodate the bigger unit buttons
+					<li>Units on new turn messages scroll also drawn double size so easier to see which unit it is
+					<li>Units with flags (or other variable colour bits) are now drawn in the controlling wizard's colour
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Fixed bug where in simultaneous turns games you could sometimes walk onto a tower from Myrror without fighting the units guarding it
+					<li>When a wizard is banished, don't charge the 3 magic power consumption of Wizards' Guilds, as wizards generate no sources of magic power when banished, this made it go negative
+					<li>It was possible in a certain way to cast combat spells when not your turn, so fixed this (and applied same to Done/Wait/Flee)
+					<li>New turn messages with long lines of text now wrap correctly
+				</ul>
+				
+				<b>Removed features:</b>
+				<ul>
+					<li>Removed option to change max number of units per map cell to anything other than 9 (I feel this is too tightly tied to the economy and needing to provide food for bigger stacks)
+				</ul>
+			<td>
+		</tr>
+		<tr>
+			<td align=left>0.9.9.2</td>
+			<td align=left>14 Jun 2021</td>
+			<td align=left>
+				<b>New features:</b>
+				<ul>
+					<li>AI players will decide which items to give to which heroes
+					<li>Spell of Mastery can now be cast to win the game
+				</ul>
+				
+				<b>All remaining Hero skills now work correctly:</b>
+				<ul>
+					<li>Armsmaster granting experience to stacked normal units
+					<li>Noble giving +10 gold per turn instead of charging upkeep
+					<li>Charmed giving +30 resistance in combat
+					<li>Leadership giving bonus to melee and ranged attack, as well as fire breath attacks and thrown weapons, of the whole unit stack
+					<li>Prayermaster giving bonus to resistance of the whole unit stack
+					<li>- Spell Save from hero items used in conjunction with attacks that roll against enemy unit's resistance
+				</ul>
+
+				<b>Unit skills that now work correctly:</b>
+				<ul>
+					<li>Flying units in combat can only be attacked by enemy units who are also flying, have a thrown, breath or gaze attack, or with ranged attacks
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Holy Bonus and Resistance to All now only apply in combat
+					<li>Split "Fire damage" out into separate "Fire breath damage" type, so that Magic Immunity provides 50 defence against it but does not make the unit completely immune as per MoM wiki
+								(Magic Immunity does make units completely immune to other fire-based attacks like Fire Bolt or Flame Strike)
+					<li>When raider cities are being given free buildings at start of game, make sure the race inhabiting the city is actually allowed that kind of building (stop Halfings and Dwarves from getting Stables)
+					<li>Combat screen was showing area effects (e.g. crusade, charm of life) owned by players not even involved in the combat
+					<li>AI players are supposed to ignore heroes when considering all units they can construct or summon, but were not
+					<li>Animation for spells being cast on overland map were being shown even if the spell was cast on the opposite plane to what we're currently looking at
+				</ul>
+				
+				<b>Text updates:</b>
+				<ul>
+					<li>Updated help text of Leadership hero skill to be accurate
+					<li>Updated help text of several unit attributes to include mentioning bonuses from Leadership, Prayermaster and others
+				</ul>
+
+				<b>Technical changes:</b>
+				<ul>
+					<li>Server now exposes MBeans so you can use JConsole to see who is connected, which sessions are running and other useful info
+				</ul>
+			</tr>
+		<tr>
+			<td align=left>0.9.9.1</td>
+			<td align=left>4 Jun 2021</td>
+			<td align=left>
+				<b>New features:</b>
+				<ul>
+					<li>Fame gained and lost from winning/losing important combats, capturing/losing cities, banishing/defeating a wizard, losing heroes
+					<li>Get offers to hire heroes and units, and to buy hero items
+					<li>Gold upkeep of troops is now reduced by your fame
+					<li>New game setting to control whether razing cities gains or loses fame (on for Intro..Impossible difficulty levels for accuracy with original MoM; off for Recommended difficulty level)
+				</ul>
+
+				<b>Retorts that now work correctly:</b>
+				<ul>
+					<li>Famous retort now grants +10 fame and doubles chance of receiving offers each turn
+					<li>Charismatic halves price of offers
+				</ul>
+
+				<b>Spells that now work correctly:</b>
+				<ul>
+					<li>Just Cause now grants +10 fame
+				</ul>
+				
+				<b>Unit abilities that now work correctly:</b>
+				<ul>
+					<li>Heroes with Caster ability parked in Wizard's fortress now add half their caster value to the controlling Wizard's casting skill for casting overland spells
+					<li>Heroes with Sage ability now contribute to Wizard's research
+					<li>Heroes with Legendary ability now contribute to Wizard's fame
+				</ul>
+
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Units summoned in a city combat (like phantom warriors) no longer get  get magic/mithril/adamantium weapons if the city can make them (thanks to Druthlen for spotting this)
+					<li>+10 skill bonus from Archmage is now added dynamically so 1) you gain it if you earn Archmage as a treasure reward during the game and 2) spending magic power to improve casting skill is now worked out
+prior to adding the +10, so you aren't penalized for having the higher casting skill (after I read this on MoM wiki)
+					<li>Gain 2 exp instead of 1 for each unit killed in battle (again because I read this on the MoM wiki, previously had just guessed +1 exp)
+					<li>Fixed server issue where if something made a bad connection to the server (e.g. try connecting with mismatching version MoM IME client), it would hang the server and thereafter refuse to accept legitimate connections
+					<li>If you or another wizard gains additional picks from treasure and already have the screen open looking at that wizard, they will now update properly without having to refresh it manually
+					<li>AI players were generating incorrect player names since all the XML refactoring in 0.9.9.0
+					<li>Power history graph didn't close out when the game ends
+				</ul>
+
+				<b>Trivial changes:</b>
+				<ul>
+					<li>Changed client to defaut to smooth zooming off since it just makes the overland map look blurry
+					<li>Updated several of the flag colours which were too dark and difficult to distinguish
+					<li>When summoning heroes, the new turn messages scroll now shows their portrait rather than the generic male/female summoning photo which didn't really look right on the scroll
+				</ul>
+
+				<b>Technical changes:</b>
+				<ul>
+					<li>If client connects to a server running the wrong version of MoM IME, now shows a popup message about it rather than just showing an exception in the log
+					<li>If client connects to a server running something other than MoM IME, now shows a popup message about it rather than just showing an exception in the log
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.9.0</td>
+			<td align=left>18 May 2021</td>
+			<td align=left>
+				<b>Spells that now work correctly:</b>
+				<ul>
+					<li>Dispel Magic, Dispel Magic true (worked before, but added sound+graphics)
+					<li>Disenchant Area, Disenchant True
+					<li>Disjunction, Disjunction True
+					<li>Spell Binding
+					<li>Counter Magic
+					<li>Just Cause reduces unrest in all cities by 1 (thanks to The MythMaker for spotting this)
+				</ul>
+
+				<b>Retorts that now work correctly:</b>
+				<ul>
+					<li>Node Mastery makes you immune to the dispelling effect of nodes
+					<li>Node Mastery earns double Magic Power from captured nodes
+					<li>Archmage's spells are twice as difficult to dispel and twice as resilient to Counter Magic, node auras and similar blocking effects
+					<li>Chaos/Sorcery/Nature mastery makes spells of that realm twice as hard to dispel
+					<li>Chaos/Sorcery/Nature mastery earn double Magic Power from captured nodes of that type
+					<li>Runemaster is twice as good at dispelling
+				</ul>
+				
+				<b>Unit abilities that now work correctly:</b>
+				<ul>
+					<li>Spell Lock preventing other unit enchantments from being dispelled and having special difficulty of 150 on attempts to dispel it
+				</ul>
+				
+				<b>Other game elements that now work correctly:</b>
+				<ul>
+					<li>Dispelling power of nodes
+				</ul>
+				
+				<b>Minor new features:</b>
+				<ul>
+					<li>If client language is set to other than English, but no translation exists for a particular name or piece of text, will now default that text to English rather than displaying the language entry key, so at least the game is still playable
+				</ul>
+			
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>AI had no targetting rules for Raise Dead / Animate Dead and so if it tried to cast these in combat it would give an error
+					<li>AI would try to cast Wall of Fire/Darkness/Stone in combat even if it already had that spell in that city, resulting in an error
+					<li>If we previously saw a unit and it had spells cast on it, then while we couldn't see it lost some of those spells, and now we walk up to it and see the unit again, we can now see the spells are gone
+					<li>Properly handle if the last enemy unit in combat has lost health but has Lionheart cast on it and we dispel it thereby killing it and winning the combat
+					<li>Properly handle if the last enemy unit in combat has lost health but has Lionheart cast on it the unit owner willingly switches Lionheart off thereby killing it and losing the combat
+					<li>When wizards were defeated and removed from the game, any combat area effects they still had cast weren't being cleaned up
+					<li>Fixed error if a player's units died in combat before they even had an overland move (if they weren't first player in a reloaded game)
+				</ul>
+			
+				<b>Removed features:</b>
+				<ul>
+					<li>Removed "unit scale" option which would show 4x number of figures instead of double pixel size of combat units so just works like original MoM
+				</ul>
+
+				<b>Name changes:</b>
+				<ul>
+					<li>Previously there was both a sword and wand both called "White Lightning".  Renamed the wand to "Wand of Lightning" so they're unique.
+					<li>Previously there was both a shield and axe both called "The Resistor".  Renamed the axe to "Axe of Resistance" so they're unique.
+					<li>Updated description of range penalty on channeler retort to be more accurate.
+				</ul>
+
+				<b>Technical changes:</b>
+				<ul>
+					<li>Huge refactoring of XSD/XML files so all data about a wizard, unit, or any other game element is all kept in one place rather than split across 3 different files (+additional language files)
+					<li>A side effect of the XML refactoring is that now the client starts up much faster, but it takes longer to start, join or reload a game
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.8.6</td>
+			<td align=left>22 Jan 2021</td>
+			<td align=left>
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Fixed error when a spell gets cast on or removed from a unit in a combat that you aren't involved in, but are close enough to see the spell being cast
+					<li>Fixed missing validation that allowed trying to cast Earth to Mud / Disrupt Wall without picking a target combat tile
+					<li>Stopped AI trying to cast Earth to Mud / Disrupt Wall as they aren't very useful and it doesn't understand how to target them
+					<li>New game setting to stop the same wizard being chosen by more than one player (which is on by default) now doesn't stop more than one player from picking Custom
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.8.5</td>
+			<td align=left>24 Sep 2020</td>
+			<td align=left>
+				<b>AI improvements:</b>
+				<ul>
+					<li>AI wizards will now summon units overland, including knowing when to summon magic/guardian spirits to capture nodes with
+					<li>AI wizards will now cast unit enchantments, city enchantments and city curses overland
+					<li>AI wizards will now cast all types of combat spells
+				</ul>
+
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Fixed several issues to do with the AI handling of units moving on/off of Towers of Wizardry
+					<li>Stopped cities dropping to under 1,000 people (at which point you have 0 farmers and can't produce anything)
+				</ul>
+				
+				<b>Game balancing:</b>
+				<ul>
+					<li>Reduced bonuses (cheating) that AI wizards and raiders get on "Recommended" difficulty level to be more like "Hard" in original MoM rather than like "Impossible"
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>In simultaneous turns games, fixed problem where units would often starve before your next turn after you capture a city from an AI player
+					<li>Fixed crash sometimes happening when things are being automatically cancelled/killed off to save overspent resources (e.g. units starving)
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.8.4</td>
+			<td align=left>30 Aug 2020</td>
+			<td align=left>
+				<b>New features:</b>
+				<ul>
+					<li>Historian screen added, showing graph of all wizards' power base
+					<li>Ending animation and game closes down properly when you win the game by capturing the last wizard's last city
+				</ul>
+
+				<b>AI improvements:</b>
+				<ul>
+					<li>In combat (both AI wizards, raiders, and your own units if you put the combat on Auto), units now prefer to attack units close to them, so they won't run past perfectly good targets to try to reach an identical unit at the back
+					<li>Stopped AI from using settlers to build cities with max city size less than 5, so it doesn't go throwing tiny useless cities all along the tundra
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>In simultaneous turns games, units with a pending combat are no longer considered to be "halfway there" to the combat they are waiting to do, and can be attacked by another combat in their old cell prior to leaving.  The old rules gave rise to some unresolvable situations.
+					<li>In simultaneous turns games, fixed problems with casting spells if there's more than one combat in the same location in the same turn
+					<li>In simultaneous turns games, fixed problems with a player possibly losing their turn altogether if there's more than one combat in the same location in the same turn
+					<li>In simultaneous turns games, fixed melding with nodes
+					<li>In simultaneous turns games, fixed moving onto towers from Myrror
+					<li>Fixed error in treasure reward screen when you find a hero, but there is no space for them to fit or to be bumped to an adjacent tile
+					<li>If a unit has a spell cast on it (e.g. Lionheart) that gives it +HP, and takes enough damage and then has the spell removed thus ending up with 0 or negative HP, then the unit is killed off
+					<li>Stopped combat ended scroll from saying "hero item(s) from heroes that died in battle were added to your fortress vault" if you lost the combat
+					<li>Fixed graphics XML editor to correctly handle the xsd:union used to allow colours to be 6 or 8 chars long
+				</ul>
+
+				<b>Performance:</b>
+				<ul>
+					<li>Moved code to work out where units can move to on the overland map into common lib, so the client can work this out itself - previously sent a message to the server and the server replied back with the movement area which made things very slow especially for non-local server
+					<li>Army list screen is now a modal, so you can open it but must close it again, you can't leave it open and continue using other screens.  Did this because once you have several hundred units, this screen was making the client freeze and lock up and generally run terribly.
+					<li>All data sent between client and server is now compressed, which helps a lot with a non-local server
+					<li>Several actions on the server that generate a lot of unit updates to the client now collate those into a single bulk message (e.g. units all getting full movement back at start of a turn, units healing 1 HP and gaining 1 exp at the end of a turn) so the client doesn't get flooded with messages
+					<li>The client when processing bulk unit update messages is now more clever about only updating certain UI components once for the whole bulk message, instead of once per unit
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.8.3</td>
+			<td align=left>13 Aug 2020</td>
+			<td align=left>
+				<b>New features:</b>
+				<ul>
+					<li>When clicking a spell to cast it in the spell book, now shows an animation rather than closing the spell book
+					<li>Can now click spells on the Queued Overland Spells screen to cancel them
+					<li>Non-corporeal units (like Magic Spirits) and units with Wraithform cast on them now look semi-transparent in combat
+					<li>New client option allows turning off animating unit movements on the overland map to speed up the game - you need this after you have Awareness cast
+					<li>Number of lairs now varies according to map size
+					<li>Recalculated the number of nodes, towers, raider cities on maps that are smaller/larger size than standard to make maps scale more consistently
+					<li>Added Gigantic map size option (but warning, the AI turns are very slow so this is probably not really viable and just there for testing)
+					<li>When wizards are banished or defeated, can steal up to 2 spells from them
+					<li>When wizards are banished or defeated by another wizard, half their stored Mana is taken
+				</ul>
+
+				<b>AI improvements:</b>
+				<ul>
+					<li>Raiders now have different weightings to decide what to build than AI wizards do, so they put put greater emphasis on churning out lots of units, and less on constructing buildings
+					<li>Raiders get lower city growth and resource production bonuses than AI wizards
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>After using Create Artifact and picking Spell Charges, and using the spell book to choose the spell to imbue into the item, spell book now returns to normal overland casting mode
+					<li>If banished while in the middle of casting an overland spell, queued spell screen might show that mana as contributing towards casting Spell of Return (though it was right on the server, so just a visual error)
+					<li>Units with 0 attack strength (like Settlers) are now not allowed to make melee attacks in combat
+					<li>If both sides in an AI-vs-AI combat are doing nothing (for example 2 settlers who cannot attack each other) then just end it immediately and declare the defender as the winner
+					<li>Fixed error when trying to use spells natural to a unit (e.g. Magicians' Fireballs) or spells imbued into hero items if that spell can normally have extra MP channeled into it for more damage
+					<li>Fixed problems if a spell awarded from capturing a node/lair/tower happened to be the spell you were currently researching
+					<li>Don't allow life stealing attacks (e.g. ghouls) creating undead after a combat to result in going over the maximum number of units allowed per map cell
+					<li>Fixed crash when the last unit in combat is killed by casting a spell
+					<li>Fix when selling a building, sometimes the city view screen would not update to show it removed
+					<li>In simultaneous turns games, at the end of each turn AI players now clear pending movements of anywhere they couldn't reach in 1 turn; I think this was causing most of the issues/crashes with simultaneous turns games
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.8.2</td>
+			<td align=left>31 Jul 2020</td>
+			<td align=left>
+				<b>Handling of wizard's fortress being taken:</b>
+				<ul>
+					<li>Shows animation when wizards are banished or defeated, and when they successfully cast Spell of Return
+					<li>When wizards are defeated (last city is captured), all remaining spells and units owned by the wizard disappear and any nodes they had captured return to an unowned state
+					<li>When wizards are banished (have another city), if summoning circle is in a different city then they lose that too
+					<li>When wizards are banished (have another city), power base and research are all zeroed out
+					<li>When wizards are banished or defeated, all queued spells are removed and Spell of Return is automatically queued
+					<li>When a wizard loses a combat where their summoning circle is, if their Wizard's Fortress is in a different city then their summoning circle automatically moves there
+					<li>When human players are defeated (last city is captured), they're converted to AI players and kicked out of the game back to the title screen
+					<li>When the last human player is defeated, the game ends
+					<li>Wizards cannot pick spells to cast or research while banished (but heroes or units like Archangels with their own MP pool can still cast in combat)
+				</ul>
+				
+				<b>Other new features:</b>
+				<ul>
+					<li>AI will cast overland enchantments
+					<li>AI will use alchemy to turn gold into mana if their mana is low (principally added this so banished AI wizards can raise enough mana to cast Spell of Return)
+					<li>When heroes gain a level, now shows on messages scroll and plays music
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>In one-player-at-a-time games, when AI players initiate a combat it will now correctly pause their turn until the combat completes and resume afterwards
+					<li>If an AI player tries to execute a special order on a unit (like build a city or road) and fails, now just skips that unit rather than getting stuck in a loop
+					<li>When rush buying units, now shows how much it will cost
+					<li>Fixed exception that occurred in UI sometimes when units are killed or removed (e.g. settler making a city, or magic spirit melding with a node) but the UI was still trying to draw selection buttons for them
+					<li>Move Fortress will only move the Summoning Circle as well if it was previously in the same place as the Wizard's Fortress
+				</ul>
+
+				<b>Technical changes:</b>
+				<ul>
+					<li>Now will supply a choice of 2 downloads, one with a pre-packages JRE for 64 bit Windows so there's no need for people to know how to download and set up Java
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.8.1</td>
+			<td align=left>6 Jul 2020</td>
+			<td align=left>
+				<b>Major new features:</b>
+				<ul>
+					<li>Roads are now placed at the start of the game between raider cities that are close to each other
+					<li>Engineers can now build roads
+					<li>Roads correctly reduce movement points to move along them, both overland and in combat
+					<li>AI will build roads
+				</ul>
+
+				<b>Spells that now work correctly:</b>
+				<ul>
+					<li>Enchant Road
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Fixed crash possible when a city was razed, but an AI player did not see it get razed and still believes there is a city there, and is considering where to send a settler to put a new city (thanks to LowSkill for raising this)
+					<li>Various tweaks made to AI to try to stop it getting stuck in an endless loop now that enchanted roads mean units can move forever
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.8.0</td>
+			<td align=left>31 May 2020</td>
+			<td align=left>
+				<b>Major new features:</b>
+				<ul>
+					<li>AI decides which of its cities can build the best units, and how badly it does or doesn't need more combat units, and sets all city construction accordingly
+					<li>AI decides how much defence it needs in all of its cities and captured nodes and towers and will station units there accordingly
+					<li>AI will use units to scout around the map, from stacks of combat units, and attack where it thinks it has a good chance of winning a combat
+					<li>AI will make intelligent decisions about what tax rate to pick rather than just sticking on the default
+					<li>AI will decide when it should rush buy what cities are constructing
+					<li>AI wizards and Raiders get the same production bonuses and benefits such as cheaper upkeep as in the original MoM, depending on difficulty level
+				</ul>
+
+				<b>Minor new features:</b>
+				<ul>
+					<li>Improved initial placement of wizard and raider cities to stop wizard cities often appearing right next to each other
+					<li>City view and unit info screens now show name of the player, since the flag colours are sometimes difficult to tell apart
+					<li>Changed all difficulty levels to turn on allowing each wizard to be chosen only once
+					<li>Created a new "Recommended" difficulty level, which is like Impossible but you (and the AI wizards) only get 10 spell picks instead of 11, and raider cities have no size cap (other than from available food)
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Removed melee attack from Barbarian and Gnoll settlers, which was making the AI treat them like combat units
+				</ul>
+
+				<b>Technical changes:</b>
+				<ul>
+					<li>Now requires Java 11 to run
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.7.4</td>
+			<td align=left>25 Sep 2016</td>
+			<td align=left>
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Fixed crash when capturing empty cities
+					<li>Fixed crash in the combat cleanup code which happened after a hero died in combat
+					<li>Units with no basic +to hit / +to block skill that gain it through some bonus (e.g. casting Holy Weapon or gaining experience) would never show it on the unit info screen (but the damage calculations would use it - visual bug only)
+					<li>New turn messages scroll will now show a scroll bar if you generate a huge number of messages in a single turn
+					<li>City construction that requires for example 100 production points completes when 100 production have been put towards it; previously it would require 101
+					<li>Stop overland map window being resized down below 640x480
+					<li>Fixed so area on the main map screen underneath the resource area is kept black rather than sometimes having leftover bits of map visible there
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.7.3</td>
+			<td align=left>4 Sep 2016</td>
+			<td align=left>
+				<b>Spells that now work correctly:</b>
+				<ul>
+					<li>Dispel Magic, Dispel Magic true
+					<li>Recall Hero, Word of Recall
+					<li>Earth Lore
+					<li>Corruption
+					<li>Disrupt Wall
+					<li>Earth to Mud
+					<li>Black Sleep
+					<li>Damage from Psionic Blast is now downgraded from Illusionary to Single Figure if the target has Immunity to Illusions or True Sight
+				</ul>
+
+				<b>Skills that now work correctly:</b>
+				<ul>
+					<li>Negate First Strike
+					<li>Purify
+					<li>Elemental Armour and Resist Elements will no longer stack
+					<li>Iron Skin and Stone Skin will no longer stack
+					<li>Illusionary Attack now upgrades the kind of damage dealt by other attacks (melee, ranged, thrown) to be Illusionary, unless the target has Immunity to Illusions or True Sight
+					<li>Armour Piercing now upgrades the kind of damage dealt by other attacks (melee, ranged, thrown) to be armour piercing
+					<li>Holy Weapon, Eldritch Weapon and Flame Blade now negate Weapon Immunity
+					<li>Undead units now get all their invulnerabilities
+				</ul>
+
+				<b>Other major new features:</b>
+				<ul>
+					<li>Hero items now grant skills based on their imbued properties
+					<li>Skills that grant other skills now work correctly (e.g. Invulerability grants a secondary Weapon Immunity effect)
+				</ul>
+				
+				<b>Minor new features:</b>
+				<ul>
+					<li>Flying and non-corporeal units now ignore terrain in combat, so they neither are impeded by ridges nor gain the benefit of roads; and can also fly over Wall of Stone/City Walls
+					<li>Undead now have a visibly different appearance in combat and on the unit info screen
+				</ul>
+
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Fixed bug stopping conditional skill bonuses from applying (e.g. bonuses from Resist Elements that only apply when the incoming attack is Nature or Chaos-based)
+					<li>Fixed bug where if a unit makes a melee attack in combat and dies from the counterattack, it would still prompt the now dead unit to make another move
+					<li>Can no longer target city curses (e.g. Famine) at cities that you cannot currently see (avoids awkwardness if the city has since been destroyed but you aren't aware of it because you haven't seen it for a long time)
+					<li>Fixed movement rate rules for non-corporeal creatures so they take a full movement point per tile instead of a half (though I decided to set this up slightly differently than the original MoM)
+					<li>Fix incorrect case of searches for ".Master of Magic Language.xml" files
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.7.2</td>
+			<td align=left>17 Feb 2016</td>
+			<td align=left>
+				<b>Major new features:</b>
+				<ul>
+					<li>Cities screen
+					<li>All damage dealt is now assigned one of a list of damage types, e.g. fire damage, stoning damage, and immunities work accordingly.  e.g. Magic Immunity will make a unit completely invulnerable to fire damage, but Fire Immunity will grant 50 defence against it.
+					<li>Damage to units is now recorded as healable, permanent and life stealing.  Units killed mostly with life stealing damage (e.g. from ghouls, life stealing attacks or life drain spell) will come back as Undead.
+					<li>Raise Dead and Animate Dead spells now work correctly and can be used to resurrect units in combat, as long as they weren't killed mostly by permanent damage
+					<li>Healing and Mass Healing spells now work correctly
+					<li>Life stealing attacks now recover HP to the attacker
+				</ul>
+				
+				<b>Minor new features:</b>
+				<ul>
+					<li>When heroes holding items die in combat, those items are awarded to the winner of the combat
+					<li>Units with free spells (e.g. Giant Spiders 'casting' web, or Magicians casting Fireball) now show an icon for it in their skills list
+					<li>Champions' book requirements where appropriate, e.g. to summon Ravashack the Necromancer you need at least 1 Death Book
+					<li>Saved points for each saved game will now only retain saves for the last 16 turns rather than filling up disk space on the server forever
+					<li>Ability to delete saved games
+					<li>A good chunk of client-side data is no longer stored in saved game files, instead it is regenerated on the fly as the game is reloaded (so saved game files are smaller, save faster and are less likely to become unusable with newer versions of MoM IME)
+					<li>Can now cast Chaos Channels on Black Channeled units and vice versa and the resulting units have the proper characteristics of both
+					<li>Can no longer switch off Chaos Channels
+					<li>Right clicking on a blank area of the map when you have no units left requiring movement orders will now centre the map at that location (thanks to AndO3131 for this)
+				</ul>
+
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>When reloading one-player-at-a-time saved games, fixed the turn number not appearing on the first turn
+					<li>Demon Lord and Ravashack the Necromancer's ranged attacks didn't include the life stealing component
+					<li>Fixed the magic screen not showing when an overland spell is added to the head of the spell queue until the following turn (thanks piratep2r for pointing this out)
+				</ul>
+
+				<b>Fixed bugs in the editors:</b>
+				<ul>
+					<li>Editors will now run with no internet connection (previously it wanted to download xml.xsd on startup)
+				</ul>
+		</tr>
+		<tr>
+			<td align=left>0.9.7.1</td>
+			<td align=left>23 Dec 2015</td>
+			<td align=left>
+				<b>Minor new features:</b>
+				<ul>
+					<li>Housing and Trade Goods settings now work correctly
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Fixed crash when awarding specials (books or retorts) in treasure rewards
+					<li>Fixed crash if after selling a building in a one-player-at-a-time game, you click the gold coin marker than appears showing that a building was sold
+					<li>Fixed crash if you have a city window open looking at a city, and it gets captured and the player razes it
+					<li>When the messages scroll tells you that a city has finished construction, and you change the construction via the city screen without clicking on the scroll, the scroll now updates properly
+				</ul>
+		</tr>
+		<tr>
+			<td align=left>0.9.7.0</td>
+			<td align=left>21 Dec 2015</td>
+			<td align=left>
+				<b>Major new features:</b>
+				<ul>
+					<li>Unify unit skills and attributes so the only place any distinction is made is what images are specified for them in the graphics XML and how they appear on the unit info screen, which there's a new setting on the Options screen for
+					<li>Movement speed is now treated like any other unit attribute, and displayed as such on the unit info screen (this is to enable effects that modify movement speed to work, such as the Endurance spell)
+					<li>Spells which add some amount to another unit stat, or all units in the stack, now give their correct bonuses, e.g. Iron Skin, Endurance, Lucky, Holy Bonus
+					<li>Conditional stat bonuses that only activate for certain units, or in response to certain kinds of attack, also work correctly, e.g. Large Shield, Flame Blade, Bless, Resist Elements
+					<li>Enchant item and create artifact spells now work correctly, and the artificer and runemaster retorts give correct crafting cost reductions; several new options on the New game unit settings screen govern hero items
+					<li>Armies screen
+					<li>Items screen, so hero items can be moved around between storage, being equipped by different heroes, and broken on the anvil to convert into MP
+					<li>Heroes can cast combat spells from their own mana pool, or cast spells imbued in items; same for units with their own mana pool like Efreets and Archangels
+					<li>Units can now cast any fixed spells they have (e.g. Giant Spiders 'casting' Web, or Magicians casting Fireball)
+					<li>Treasure rewards from capturing nodes/lairs/towers
+					<li>Overland mini-map
+				</ul>
+					
+				<b>Minor new features:</b>
+				<ul>
+					<li>New setting on the Options screen for whether to display hero portraits
+					<li>Units remember being on patrol orders when saved games are reloaded
+					<li>Units remember pending movement orders when saved games are reloaded
+					<li>Can now rename cities at any time - you don't get the prompt popping up to name a city when it is created
+					<li>Handles right clicks on blank areas of the map better, so the game doesn't appear to get stuck showing "Current player: you"
+				</ul>
+
+				<b>Features from 0.9.4 Delphi client added back in:</b>
+				<ul>
+					<li>Upkeep shown on the unit info screen now includes the upkeep of spells cast on the unit, and will show halved for wizards with the Channeler retort
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>In one-player-at-a-time games, pending movements will now not initiate combats - you have to reclick the destination to confirm the attack first.  This fixes problems when 2 or more pending moves resulted in multiple combats being initated at the same time.
+					<li>Fixed combat attack spells like Doom Bolt which became broken in 0.9.6.2
+					<li>Leaving the new game unit settings option "Roll hero skills at start of game" not ticked now works correctly and doesn't crash the server on startup
+					<li>Units no longer show their movement animation if they're moving on the opposite plane to the one you're looking at
+					<li>Fixed text of hero skills on unit info screen, so they don't display as e.g. " Armsmaster 1" or "Super Armsmaster 2"
+					<li>Heroes now show their complete names, e.g. "Rakir the Beastmaster" instead of just "Beastmaster"
+					<li>Fixed attacking lairs/nodes on Myrror directly from a tower of wizardry, and visibility of units guarding towers when looking at the tower from Myrror
+					<li>Fixed crash when trying to rush buy a building or unit that had 0 production put towards it so far
+					<li>Fixed crash when first combat is against a city with no defenders
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.6.3</td>
+			<td align=left>4 Sep 2015</td>
+			<td align=left>
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Provided .sh files, fixed classpaths and loading of XSDs, so runs smoothly on Linux
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.6.2</td>
+			<td align=left>25 Aug 2015</td>
+			<td align=left>
+				<b>Major new features:</b>
+				<ul>
+					<li>Special attacks now work correctly: Armour Piercing, Poison, Breath, Thrown, Gaze, Touch attacks, Cause Fear
+					<li>First Strike and Haste correctly alter attack resolution sequence
+					<li>Range penalties for non-magic range attacks, plus range penalty limitation by Long Range skill
+					<li>Melee and ranged attacks are now processed from each figure separately (as per the MoM Wiki) rather than a combined attack (as the MoM strategy guide incorrectly states)
+					<li>Calculate position of national borders/friendly zones from each player's memory independantly, and allow viewing borders via new checkboxes on the Options screen
+				</ul>
+					
+				<b>Minor new features:</b>
+				<ul>
+					<li>Proper z-sorting of combat map elements, so it doesn't look glitchy when units walk past each other
+					<li>When a city is captured, any effort they'd put towards a construction project is now lost like the original MoM, and the chosen construction resets to default (housing)
+					<li>Casting city enchantments in combat (wall of fire/wall of darkness) now work correctly
+					<li>"Can see what enemy cities are constructing?" new game Fog of War option now actually lets you see what enemy cities are constructing
+					<li>Tripled size of damage calculation breakdown box given how much more data is shown now that figures attack separately
+					<li>Skills with an attack rating such as Fire Breath and Thrown Weapons now display it correctly
+				</ul>
+
+				<b>Features from 0.9.4 Delphi client added back in:</b>
+				<ul>
+					<li>Combat tile border images, for wall of stone/darkness/fire
+				</ul>
+
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Units coming into view that have enchantments cast on them no longer show the spell animation
+					<li>Prevent casting the same combat enchantment (e.g. Prayer) multiple times
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.6.1</td>
+			<td align=left>31 May 2015</td>
+			<td align=left>
+				<b>Major new features:</b>
+				<ul>
+					<li>Loading and unloading units into transports (ships and floating islands)
+					<li>Naval combat handled correctly (swimming and flying units can help; land units cannot)
+					<li>Saving and reloading multiplayer games
+				</ul>
+
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Fixed joining multiplayer games
+					<li>Fixed bug where if you try to take a unit off of patrol, but move the mouse even a pixel between pressing and releasing, the patrol orders are not cancelled
+					<li>Fixed crash on help text page for Floating Island spell
+					<li>Fixed crash when starting a combat on a water tile
+				</ul>
+
+				<b>Fixed bugs in the editors:</b>
+				<ul>
+					<li>Fixed server and language editors, broken in 0.9.6 with error about deleted namespace http://momime/common/database/newgame
+					<li>Fixed movement rate preview on unit screen in the server editor (values were being calculated incorrectly)
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.6</b></td>
+			<td align=left>22 May 2015</td>
+			<td align=left>
+				<b>Major new features:</b>
+				<ul>
+					<li>Complete revamp of how simultaneous turns movement and combats are resolved (most noticable effect of which is that the server now chooses order to process combats in rather than asking players)
+					<li>Web, Entangle and Possession and many combat attack spells such as Fire Bolt, Flame Strike, Disintegrate, Death Spell are now castable (the fact that they're castable doesn't necessarily mean that they work 100% yet, in particular immunities to spells do not work yet)
+					<li>Saving and reloading single player games (please read comments in readme about this)
+				</ul>
+					
+				<b>Minor new features:</b>
+				<ul>
+					<li>Combat Area Effects from City Enchantments, so that Heavenly Light and Cloud of Shadow work correctly
+				</ul>
+
+				<b>Features from 0.9.4 Delphi client added back in:</b>
+				<ul>
+					<li>Images now show correctly inline in help text, e.g. when right clicking to get help on unit attributes such as Melee or Defence
+					<li>Calculator button in combat shows detailed damage calculation breakdowns again
+					<li>Icons showing special orders (meld node, build city, dismiss) are shown on the overland map in simultaneous turns games, and units on patrol are greyed out
+				</ul>
+
+				<b>Fixed bugs (thanks to Andy III for spotting all 3 of these):</b>
+				<ul>
+					<li>Fixed game crashing if you try to give special orders (meld node or build city) to units in a simultaneous turns game
+					<li>Fixed building raceless units (triemes, catapaults, etc) 
+					<li>Fixed cancelling too many spells after city combats
+				</ul>
+				
+				<b>Changes to the editors:</b>
+				<ul>
+					<li>Greatly improved handling of entities with an inheritance path (i.e. just about everything in the server XML); doing much with these threw a lot of exceptions before
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.5.5</td>
+			<td align=left>18 Feb 2015</td>
+			<td align=left>
+				<b>Features from 0.9.4 Delphi client added back in:</b>
+				<ul>
+					<li>Auto centreing of map to the unit that's moving
+					<li>Right clicking on lots of in game elements to get help text
+					<li>On the custom picks screen, clicking on retorts that are disabled will pop up a message explaining why they are disabled (e.g. Divine Power will tell you that you need 4 Life Books)
+					<li>Shortcut keys, e.g. arrow keys moving on overland map, N for Next Turn, F1 for Surveyor and so on
+					<li>Renaming heroes
+				</ul>
+
+				<b>Minor new features:</b>
+				<ul>
+					<li>The mini scroll that appears at the end of a combat saying whether you won or lost now has a proper close button
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Fixed overlap on custom picks screen that prevented clicking on the bottom line of retorts (Summoner, Charismatic, Node Mastery)
+					<li>Fixed Spell Ward to show effect name (e.g. Chaos Ward) after casting
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.5.4</td>
+			<td align=left>22 Jan 2015</td>
+			<td align=left>
+				<b>Features from 0.9.4 Delphi client added back in:</b>
+				<ul>
+					<li>Options screen
+					<li>Coloured bars on the overland map screen to show progression of players' turns
+					<li>Show name of player whose turn it currently is
+					<li>Simultaneous turns games (however there's a lot of issues with combats; recommend sticking to one-player-at-a-time games if you want a stable game, see planned list for 0.9.6)
+				</ul>
+
+				<b>Minor new features:</b>
+				<ul>
+					<li>Language choice moved from its own main menu option to a value on the options screen, so its now possible to change language after a game has started
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.5.3</td>
+			<td align=left>1 Jan 2015</td>
+			<td align=left>
+				<b>Features from 0.9.4 Delphi client added back in:</b>
+				<ul>
+					<li>Icons on the Next Turn button that tell you when you have insufficient production, need to target a spell, or need to pick a spell to research before you can end your turn
+					<li>Apprentice/F3 to view queued overland spells
+					<li>Wizards/F9 screen
+				</ul>
+				
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>Fixed bug from 0.9.5.2 that set the start size of wizard cities incorrectly
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.5.2</td>
+			<td align=left>24 Dec 2014</td>
+			<td align=left>
+				<b>Features from 0.9.4 Delphi client added back in:</b>
+				<ul>
+					<li>Customizing new game options (map size, difficulty level and so on)
+					<li>Custom wizard picks, portraits and flag colours
+					<li>Joining multiplayer games
+				</ul>
+
+				<b>Minor new features:</b>
+				<ul>
+					<li>New game options default to more commonly used settings (e.g. Impossible rather than Intro)
+					<li>Customizing new game options has been improved so that "custom" settings aren't always based on Large/Impossible/Powerful settings
+					<li>Shuffled some new game options onto the custom map size screen
+					<li>Added more map size presets
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.5.1</td>
+			<td align=left>30 Nov 2014</td>
+			<td align=left>
+				<b>Major new features:</b>
+				<ul>
+					<li>Client has been ported to Java
+					<li>No cumbersome MSI installer and no configuration necessary - just unzip and run
+					<li>All the windows can be independantly moved around , and you can open multiple city and unit screens (this means there is no more full screen option)
+					<li>Eliminated concept having to "attack" nodes/lairs/towers in order to scout what kind of units are inside - can now see these just by one of your units being able to see the map cell, just like scouting units guarding an enemy city
+				</ul>
+				
+				<b>Minor new features:</b>
+				<ul>
+					<li>No longer requires a copy of all the LBX files from the original MoM
+					<li>Should now in theory run on non-Windows operating systems, though this is untested
+					<li>New turn messages now play music (so you get the music for constructing a building or researching a spell)
+					<li>Overland enchantments changed to proper animations like the original MoM rather than just new turn messages
+					<li>Overland unit enchantments (e.g. endurance, flame blade) now show proper animations and sound effects
+				</ul>
+
+				<b>Fixed bugs:</b>
+				<ul>
+					<li>At the map wrapping boundary, fixed bug that sometimes units will be drawn moving e.g. up-left when tried to move them up-right
+					<li>In 0.9.4, combat sounds and animations with ranged attacks were mixed up
+					<li>In 0.9.4, nodes would always be empty
+					<li>Fixed countless more bugs in the Java server from 0.9.4 than I can remember
+				</ul>
+				
+				<b>Changes to the editors:</b>
+				<ul>
+					<li>Removed .LBX and .NDGARC support from graphics editor, in line with how the new Java client stores resources
+					<li>Now works with relative paths, so the editors work as-is after unzipping
+					<li>Creates "backups" folder if it is missing , again so that the editors work as-is after unzipping
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.4.1</td>
+			<td align=left>12 Mar 2014</td>
+			<td align=left>
+			<b>Fixed bugs:</b>
+				<ul>
+					<li>Casting spells in combat now works again
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.4</td>
+			<td align=left>3 Feb 2014</td>
+			<td align=left>
+				<b>Major new features:</b>
+				<ul>
+					<li>After 2 attempts and far more work than I ever expected, the MoM IME server has been ported to Java. As a result it is much more stable and managable to make future changes.
+					<li>Can now set unit fog of war to "remember as last seen" - the server keeps a copy not only of the true stats/health/location of a unit, but also where every player last saw it, same as already worked for cities and terrain.
+				</ul>
+				
+				<b>Fixed bugs/ommissions:</b>
+				<ul>
+					<li>When you capture a city, you get to use whatever production had been put towards the previous owners' construction project, however you don't get to see how much this is until you hit Next Turn (the 'gold coins' don't show up on the city screen)
+					<li>Fixed new turn messages (e.g. city population changes, building/unit construction, spell casting) disappearing when additional messages are added mid-turn (e.g. from instant casting overland spells or capturing nodes)
+					<li>Fix text on options screen that says you switch to full screen using alt-tab (thanks to AussieKSU for spotting this)
+					<li>Corrected food production from Sorcery nodes from 2 to 1.5, and from Nature Nodes from 2 to 0.5
+					<li>Heroes will no longer help reduce unrest in a city if they're dead
+					<li>Help text for Just Cause now mentions that it reduces unrest by 1 (thanks to The MythMaker for spotting this); note the spell doesn't actually do anything yet, its only the help text that has been updated
+					<li>Fixed some glitches to do with setting Fog of War for units to "Can always see"
+				</ul>
+				
+				<b>Changes with no visible effect on the game:</b>
+				<ul>
+					<li>The new server is much stricter about the XML files it will accept, and will refuse to use XML files which do not pass a number of validation checks - which should stop bad XML data from crashing the game
+					<li>The new server runs considerably faster, by virtue of the fact that it caches the entire XML file into Java structures rather than continually parsing the XML (the old server only had very specific portions of the XML file cached)
+					<li>The new server has different UI options, so it can be ran with one window per game (as previous MoM IME versions), one window which contains status updates for ALL games, status updates output to the text console, or no status updates at all
+					<li>The new server can be switched into debug mode without downloading a separate version; the debug log file it creates is also far more detailed
+				</ul>
+				
+				<b>Changes to the editors:</b>
+				<ul>
+					<li>The editors have also all been ported over to Java.
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.9.3.1</td>
+			<td align=left>21 Jul 2008</td>
+			<td align=left><b>Fixed bugs/ommissions:</b>
+				<ul>
+					<li>Fixed combats in simultaneous turns games (thanks to sticktrick for spotting this)
+				</ul>
+		</tr>
+		<tr>
+			<td align=left>0.9.3</td>
+			<td align=left>24 Mar 2008</td>
+			<td align=left><b>Major new features:</b>
+				<ul>
+					<li>You can now resize the window and pick which mode to use when switching to full screen, both of which were previously fixed at 640x480, and it will remember the last window size used next time you load the game - you cannot however move the individual windows around (e.g. you cannot drag the spell book or city display to a different position)
+					<li>Rewrote combat map generation - now generates dark areas, ridges, features (trees/rocks), city walls, walls of fire (although they don't do anything), walls of darkness (although they don't do anything), houses according to the size of the population
+					<li>Add custom new game settings from the client - as a result, there is no longer a need to be able to create games from the server so this has been removed
+					<li>In 0.9.2, the frame rate was quite good at the start of the game when you could see very little of the map, but the more of the map you saw, the slower the frame rate dropped - the way the map is drawn has been completely rewritten so slows much less as you can see more of the map (some screens other than the overland map however do still kill the frame rate, e.g. spell book)
+				</ul> <b>Minor new features:</b>
+				<ul>
+					<li>Allow moving with the arrow keys (you must turn NumLock off), and various other shortcut keys like being able to press 'A' in combat to go on Auto, 'S' to bring up the spellbook and so on
+					<li>Area on the combat bar now displays details on the currently selected unit, such as how much movement it has remaining
+					<li>The roads within a city in combat now actually halve movement rather than just being a visual effect, and also the ridges cost double movement
+					<li>Units are now arranged differently at the start of combat (in a 5x5 block), so that defenders fit correctly within city walls when defending a city
+					<li>Now arranges units in combat more sensibly (settlers at the very back, then archers, and units with only a melee attack at the front)
+					<li>Split new game debug settings out into a proper separate page
+					<li>Add New Game fog of war option to allow scouts to see what enemy cities are building (you can't in the original MoM - this is more about simplying the code than because I really want this feature)
+					<li>Clicking on rebels now shows the detailed breakdown of the unrest calculation
+					<li>Unrest caused by distrust between city and capital race
+					<li>Unrest reduction for each two non-summoned units in a city
+					<li>Messages to do with buying and selling buildings, and scouting nodes/lairs/towers, are now all multi-language capable
+					<li>The map will now by default be drawn with linear filtering which makes it look much smoother especially at certain zoom levels, you can however switch it back to use point filtering on the options screen if desired (this only affects when you zoom the map in so the terrain tiles become enlarged)
+					<li>You can turn smoothing of edges of combat terrain off on the options screen in the same way that you can turn it off for the overland map
+				</ul> <b>Fixed bugs/ommissions:</b>
+				<ul>
+					<li>Initiating melee attacks in combat now correctly uses half of a units' total movement rather than always using 1 MP (so units with 1 MP like spearmen can now attack twice)
+					<li>Prevent moving more than 9 units (or whatever the chosen maximum is) into a map square
+					<li>Prevent casting summoning spells in combat when there are already 9 units in combat (or whatever the chosen maximum is) (unless option chosen to allow going over the limit in combat)
+					<li>After a city builds a unit which makes a stack of 9 (or whatever the chosen maximum is) it should warn you, but if you continue to build units they should be built outside the city - same applies for units summoned into a city that is already full
+					<li>The client caches the terrain smoothing rules from the graphics XML file; the cleanup code to tear down this cache when the client exits was faulty and caused "access violation" errors when closing the client
+					<li>Fixed some glitches in the code which tears down the connection to the server when the client exits - this was another cause of "access violation" errors when closing the client
+					<li>Selling a building that affects ration production now corrects farmers as needed
+					<li>Fixed layout of combat tiles - previously as units moved you could see the borders between the tiles flicker because they weren't arranged exactly right
+					<li>Stopped "waiting to receive new game options" message from appearing incorrectly if you connect to the same server twice
+					<li>Better error message if you try to sell your Wizard's Fortress or Summoning Circle
+					<li>Constructing or summoning a new unit now makes the area the new unit can see visible immediately (e.g. if it can see further than the city which built it/where it was summoned)
+					<li>Fixed a bug caused when one of your units kills the enemy and wins a combat while you have other units who still have movement left in that combat - there were a couple of effects of this, ranging from being asked to move the same unit twice in the next combat, to it outright crashing the game (thanks to Keith for spotting this)
+					<li>Fixed a bug caused when you clicked again in combat while animations were still playing - there were a couple of effects of this, ranging from being told that you were trying to move a unit that had no movement left, to it outright crashing the game (thanks to Keith for spotting this)
+					<li>Miners' Guild +50% bonus to minerals previously also applied to Wild Game (so they produced 3 rations instead of 2) - fixed so Miners' Guild bonus only applies to mines
+					<li>Fixed spacing of spell new turn messages (especially casting Overland Enchantments)
+				</ul> <b>Changes with no visible effect on the game:</b>
+				<ul>
+					<li>Client having copies of the combat map, combat ID and current player in combat in every location is daft - these should only be recorded on the server
+					<li>Removed any remaining usage of separate coordinates in favour of T2D/3DCoordinates values
+					<li>Changed new game land proportion settings from tile counts to percentages, since this is how they're entered both in the Server DB and new game forms
+				</ul> <b>Changes to the editors:</b>
+				<ul>
+					<li>The Language XML editor has been ported to Java
+					<li>All boolean values now use the proper xsd:boolean data type rather than Y/N values, and use checkbox controls in the editors; fixed Client and Server accordingly
+					<li>All enums in the editors now display in combo boxes with descriptions for each value
+					<li>The move up/down buttons now keep the moved rows selected after moving, so moving row(s) more than one position is not as tedious
+					<li>Fixed a bug where if you clicked a column heading to change the sort order of a list and then used one of the &gt;&gt; to drill down into child records, it would drill down to the child records of the wrong parent (thanks to Keith for spotting this &amp; fixing it)
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.9.2</td>
+			<td align=left>17 Oct 2007</td>
+			<td align=left><b>Major new features:</b>
+				<ul>
+					<li>You can now create new games from the client, and all the settings are multi-language capable (however until 0.9.3 you will not be able to pick "Custom" for any of the settings, to use Custom settings you have to create games from the server as before)
+					<li>Now uses the (almost) proper rules for setting the initial population and buildings in raider/neutral cities and the special population cap for raider cities
+				</ul> <b>Minor new features:</b>
+				<ul>
+					<li>To enable to creating new games from the client, connecting to a MoM IME server has been moved to a separate main menu item rather than just being at the top of the join game screen
+					<li>Now pops up up a box with an error message if connection to a server fails - previously connection errors were silently ignored so you were just left waiting wondering if it was working or not
+					<li>Column headings on grids on Join game and Wait for Players to Join screens are now multi-language capable
+					<li>Combat scale is now picked on the client options screen, and now only affects the way units are displayed in combat rather than affecting the actual rules/dice rolls, so its now purely a visual preference
+					<li>New runtime option to show the main monster type from a scouted node/lair/tower directly on the overland map (similar to how 0.9.0 looked, except that you cannot tell how many there are or if there is a second type of monster present)
+					<li>Right clicking on unit attributes (e.g. Melee, Defence, Resistance) on the unit info screen now brings up help text about them (thanks to Csimbi for pointing out this was missing)
+					<li>Server starts new games faster - players can join as soon as the client database has been built - the server then generates the map in the background (this is so that when creating games from the client, you aren't left waiting for ages before picking your wizard, spells, race, etc.)
+					<li>The values of all the tickboxes on the Options screen are now preserved when the game exists
+					<li>You can now zoom in/out the overland map by rolling the mouse wheel (thanks to Csimbi for suggesting this)
+					<li>Now caches a number if items to do with overland movement in an effort to solve the performance problems with this (its 2x to 3x faster like this, but still not ideal)
+					<li>Add debug New Game option to turn the fog of war off entirely, allowing you to see the whole map again (purpose of this is to be able to test the frame rate of the client) (Currently you turn this on by setting "Use any debug options?" to Yes - intention is later on, this will cause a whole page of debug options to be shown)
+					<li>New debug option on the Options screen to show white lines at the edge of the world (to help with debugging problems with wrapping around the edge... there is a problem where sometimes units are shown moving in the wrong direction, although I have made sure at the end of their move they are set into the correct location, so its only a visual bug)
+				</ul> <b>Fixed bugs/ommissions:</b>
+				<ul>
+					<li>Fixed "TNDGThreadLock.EnsureLocked: TNDGGridMap3DArea.GetContainer does not have lock with sequence 12 lock" error on the client when you try to construct a unit in a city that has an Alchemists' Guild (bug introduced in 0.9.1 - thanks to Csimbi and Virm for both spotting this)
+					<li>Fixed incorrect "Some of the units you are trying to move are not at the starting location" message when giving a unit a movement on the overland map where they could move more than one square in the turn (bug introduced in 0.9.1)
+					<li>Fixed being able to move units when it isn't your turn in a one-at-a-time game (if they had movement left)
+					<li>Fixed DescribeCityProductionCalculation bug when setting tax rate as zero (thanks to Lupinedreams &amp; Virm for spotting &amp; testing this)
+					<li>Fixed buildings missing cost from the change construction screen (bug introduced in some earlier version)
+					<li>Fixed selling buildings in simultaneous turns games (bug introduced in 0.9.1)
+					<li>Fixed rules for when a player knows about the monsters guarding nodes/lairs/towers - this caused problems when for example trying to cast curses on them - the client could not see the spell because the server didn't think the player could see the monster it was cast on
+					<li>Now rechecks whether the Rush Buy button should be enabled when you switch construction projects (thanks to Csimbi for spotting this)
+					<li>Rush Buy button is now disabled if the current construction projected is completed - this also has the effect that if you do Rush Buy, the Rush Buy button becomes disabled (thanks to Csimbi for spotting this)
+					<li>Fixed later frames in animations showing blackness where they should be transparent - the most noticable example was the smoke on the Armourers' Guild
+					<li>You can now cast Shatter on Heroes (thanks to Lucern for taking the time to investigate this for me)
+					<li>If you leave a game before it starts (i.e. during choosing wizard, race, etc.) and you were the only player in the game, the server will now close the game out (previously these old games were left lying around forever)
+					<li>If you leave a game after it starts, the server now closes out the game properly (previously these old games were left lying around forever)
+					<li>Fixed bug whereby additional human players could join a game, taking up the player spots reserved for the AI players/raiders/monsters
+					<li>To make smoothing the terrain happen more quickly, the client caches a number of items from the graphics XML file when it loads - on a slow PC this can still be running when the game is ready to start, in which case it should show a message, wait for the caching to finish, and then start the game - but this never worked properly and often crashed the client - now fixed
+				</ul> <b>Changes with no visible effect on the game (most of these are about preparing to port the MoM IME server to Java):</b>
+				<ul>
+					<li>The message protocol layer has been completely rewritten - all messages are now encapsulated as objects (which I can easily port to Java) instead of record structures (which have no equivalent in Java); also on the client the incoming messages and the animation layer (such as showing a unit moving on the map, or arrows flying in combat) are now one and the same - previously I had to custom write code to queue up 70% of the messages as animations... and the fact that the other 30% weren't queued I believe was the cause of the majority of the instability
+					<li>As part of this, the client now sends custom picks to the server in a single message rather than a flood of separate messages
+					<li>The movement rules and working out where units can move to on the overland map is now done entirely on the server (so that once the server is ported to Java, that's one more major block of Delphi code I can delete)
+					<li>Server's version check of the XML file now checks the namespace declaration rather than having a separate version records
+					<li>Figure layouts have been moved to the graphics XML file
+					<li>The Server XML editor has been ported to Java; also fixed various problems resulting from the Java editor saving out populationtaskid and targetmagicrealmid as null instead of an empty string
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.9.1</td>
+			<td align=left>26 May 2007</td>
+			<td align=left><b>Major new features:</b>
+				<ul>
+					<li>You can now only see the areas of the map that your units and cities can actually see, rather than the entire map
+					<li>New options on the server New Game screen to allow configuring the Fog of War between original MoM, recommended or custom settings
+					<li>On the recommended Fog of War settings, what you see of the map in areas that you have seen but do not have a unit there now is what you *remember* seeing, not its current state - so you cannot see new cities, cities grow, cities being taken over, new buildings, lairs being cleared, etc. etc.
+					<li>New options on the client Options screen control the appearance of the Fog of War (whether it is shaded/smoothed)
+					<li>Scouting special ability, flying units being able to see 2 squares, and City Walls and Oracles increasing city scouting ranges all work correctly
+					<li>Awareness, Nature Awareness and Nature's Eye spells work correctly, and Wall of Stone now also gives its increased scouting range
+					<li>You can now see a small radius around enemy cities you have cast city curses on
+					<li>You can now attack enemy units wandering around the map
+					<li>You can now attack enemy cities (graphics for cities in combat currently aren't very good)
+					<li>You can now capture enemy cities, including taking a portion of the players' gold
+					<li>You can now raze enemy cities, including the 10% gold bonus from each destroyed building
+				</ul> <b>Minor new features:</b>
+				<ul>
+					<li>Improved way units are recorded as being in combat, to simplify the overly complicated routine that checked whether Combat Area Effects (like Prayer) affect a particular unit or not
+					<li>As a side effect of Fog of War changes, monsters you've scouted in nodes/lairs/towers will no longer appear on the overland map - they now work like the original MoM, in that you have to look on the F1/Surveyor screen - I will add the ability to show them directly on the map back in 0.9.2
+					<li>Another side effect of Fog of War changes is its now possible for the Surveyor to falsely report that you can built a city at a location, because there's another city within 3 squares of there but you've not seen it yet - this is handled correctly, it will not let you create the new city if you try to do so
+					<li>All the text on the Surveyor plus various bits of text on other screens is now multi-language capable
+					<li>Combats on Myrror now have the correct brown coloured grass
+				</ul> <b>Fixed bugs/ommissions:</b>
+				<ul>
+					<li>Fixed numerous bugs to do with switching planes when moving/attacking into/out of Towers of Wizardry
+					<li>Fixed crash if you gave a unit stack a long (multiple turn) movement, then dismissed the first unit in the stack
+					<li>Fixed crash in simultaneous turns games if you tried to Dismiss a unit after giving it a movement order
+					<li>Fixed a number of issues with human players controlling units in combat that can move more than 1 square
+					<li>The above changes for how units are recorded as being in combat also fixed a known bug - previously there were problems with the application of combat area effects for defenders in Towers of Wizardry being attacked from Myrror
+					<li>The label of the 'Don't synchronize screen updates' checkbox on the Options screen will now appear in the chosen language (thanks to Aggelon for spotting this)
+					<li>Eternal Night now gives its bonus/penalty to death/life creatures using breath attacks and thrown weapons
+				</ul> <b>Changes with no visible effect on the game:</b>
+				<ul>
+					<li>Names of months were previously stored as special entries in the Language XML files, these have now been changed to standard category/entries
+					<li>A number of data items used only during map generation were previously kept for the duration of the whole game - these are now discarded after map generation is complete, so the server uses a tiny bit less memory
+					<li>Range checking every time map coordinates are read is now only enabled in the debug version - this happens thousands of times a second so done this in the hope it may slightly speed up some parts of the game
+					<li>Debug version of the server now has a different title on the main window so you can tell it apart
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.9.0</td>
+			<td align=left>9 Jan 2007</td>
+			<td align=left><b>Minor new features:</b>
+				<ul>
+					<li>As soon as all necessary human players have joined a game, the client now shows progress messages as the server starts up the game (previously you were just left waiting at the 'Waiting for players to Join' screen and it wasn't clear that everyone had already joined)
+					<li>City quality estimates no longer consider cities with max pop 30+ any better than cities with max pop 20 (which can be increased to 25 (the maximum) by Granary and Farmers' Market), and instead will look for other beneficial factors, namely a nice gold/production bonus
+					<li>City quality estimates now take nearby mineral deposits into consideration (e.g. that give +gold, +power, -unit cost), this means if you pick Myrran, you are quite likely to get an Adamantium deposit next to your starting city
+					<li>Option to show frames per second moved onto Options screen, instead of being a command line parameter, and now display fps on all screens, not just the map screen
+					<li>All remaining references from the server to the language XML files have been fixed (removed)
+					<li>As a result, the calculation breakdowns given by clicking on city growth rate and production are now 99% multi-language capable (there's a couple of hard coded <i>'s</i> remaining)
+					<li>The server no longer makes any reference to terrain tile numbers, these are read entirely from the graphics XML file (it does however have some hard coded assumptions about smoothing rules that I'll have to fix at some later stage in order to make the maps properly customizable)
+					<li>Smoothed edges of shore, desert, tundra were previous all stored as animations for consistency, even if they were not animated (animations of 1 frame!) - because they're now read from the graphics XML file only tiles that are actually animated are created as animations - this has further increased the frame rate of the client, on my laptop it has jumped by around another 60%
+					<li>Smoothing rules for shore, desert, etc. are now cached in order to make re-generation of the map whenever it changes (e.g. due to Change Terrain spell) happen at an acceptable speed; this caching runs in the background while you're choosing a game to join, wizard, spells, race and so on; if you join a game fast enough you may have to wait for it to complete as part of the initial game setup (on my PC it takes about 50 seconds, which is about the same amount of time as it takes to join a game, choose a wizard and so on)
+					<li>The list of terrain types features is now purely read from the XML file rather than being a hard coded list - in theory you could now add new terrain types, however for now, they wouldn't be used since the map generator is fixed to only generate the current types of terrain
+					<li>The list of map features (both mineral deposits and monster lairs) is now purely read from the XML file rather than being a hard coded list - the map generator places mineral deposits and lairs differently from tile types so you <b>can</b> add new mineral deposits and types of monster lair
+					<li>New option on the Options screen to switch sychronized screen updates off; this could increase the frame rate slightly, but may introduce jagged edges and other artifacts, depending on your graphics card (it has no noticable benefit on my own PC)
+					<li>Buildings that require a certain type of terrain within the city radius are now handled generically in the XML files; now this is possible, I've added the additional rules in that you can only build a Sawmill if you have some Forest and you can only build a Miners' Guild if you have some Hills or Mountains
+					<li>Add entry on main screen to credit author of chosen language XML file
+					<li>Direct 3D Caps Reporter is now included and installed with MoM IME, so anyone having graphics card troubles when running the Client has easier access to it
+				</ul> <b>Fixed bugs/ommissions:</b>
+				<ul>
+					<li>The last 3 fonts have been extended up to 255 chars, so now all fonts in the game will show accented characters (I released this change to 0.8.9 by itself, calling it 0.8.9.1)
+					<li>Fixed node auras, which became broken by a change in 0.8.9 that I hadn't spotted
+					<li>Fixed clicking on imageless text buttons (e.g. main menu, chooing retorts, choosing free spells at start) - previously you could only click on the right hand side of the button, leading to a few questions posted about 'clicking on the button and it doing nothing'
+					<li>Fixed using the Leave Game button after joining a one-at-a-time turns game, which previously crashed the client
+					<li>Fixed after leaving a game (via the Leave Game button, another player leaving an in-progress game, the server closing, etc.) to ensure no leftover forms will be displayed, which had some odd effects
+					<li>Fixed icons on unit info screen for units with more than 20 of a particular attribute (2nd and subsequent lines weren't indented to the right in 0.8.9)
+				</ul> <b>Changes with no visible effect on the game:</b>
+				<ul>
+					<li>The images for various nodes, lairs and towers that appear on the scouting screen now support animation (not used yet until such time as someone draws animated versions of these images, however it standardized and simplified the code to allow it)
+					<li>The images of cities used on the overland map are now dynamically read from the graphics XML file and support animation (not used yet until such time as someone draws additional versions of these images, however it standardized and simplified the code to allow it)
+					<li>My XML editor (on which the graphics, language and server editors are all based) now shows progress bars for loading up the grids, since some of these screens take a very long time to load
+					<li>The installer is now set to disallow Windows 95 and Windows NT installations, since the client needs DirectX 9.0 and DirectX 9.0 isn't available for those old operating systems
+					<li>The installer is now set to disallow installations on PCs with their desktops set to 8 bit colour (256 colours) since the MoM IME client won't run on them
+					<li>Updated/sorted the FAQ
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.8.9</td>
+			<td align=left>15 Nov 2006</td>
+			<td align=left><b>Major new features:</b>
+				<ul>
+					<li>The server New Game tabbed window has been completely redone to make it simpler to use and a little closer to the original MoM - all the main options are now on a single page, and the various other tabs only appear if you pick/tick "Custom" for various settings
+					<li>Sound effects in combat (NB. Many of the 'walk' sounds are wrong - I simply didn't have time to go through all 198 different units testing what sound they make when they walk - I'll fix these gradually in later versions)
+					<li>Wall of Stone, Summoning Circle and Move Fortress spells all work properly (and now show the correct images and upkeep on their help scrolls)
+					<li>Casting city enchantments now plays their proper animation, music and sound effects
+					<li>You can now cast City Curses (Chaos Rift, Famine, and so on)
+					<li>You can now cast combat summoning spells (e.g. Fire Elementals and Phantom Warriors)
+					<li>You can now cast unit enchantments in combat
+					<li>You can now only cast Unit Enchantments on appropriate types of unit (e.g. you can't cast Chaos Channels on a Storm Giant anymore!)
+					<li>You can now cast unit curses (e.g. Warp Wood, Mind Storm)
+					<li>You can now cast Combat enchantments (e.g. Prayer, Warp Reality)
+					<li>Combat area effects that alter unit stats now work correctly, this means the following spells now mostly work: Metal Fires, Warp Reality, Chaos Surge, True Light, Prayer, High Prayer, Holy Arms, Darkness, Black Prayer, Eternal Night
+					<li>Spell casting cost reduction and research bonuses from having 8 or more books work correctly, and the value of the reduction/bonus is configurable in the server New Game screen
+					<li>Spell casting cost reduction and research bonuses from Nature/Chaos/Sorcery Mastery and Runemaster now work correctly
+					<li>Spell upkeep reduction from Channeler now works correctly (see the 'Differences from Original Master of Magic' for some comments about this)
+					<li>Channeler retort now limits spell casting range penalty in combat to 1x
+					<li>Sage Master and Summoner retorts now works correctly (I've renamed the 'Conjurer' retort to 'Summoner', see the 'Differences from Original Master of Magic' page if curious why)
+					<li>Added Options screen, where you can set the music volume (I tried to also be able to change the volume of sound effect, but this proved too difficult and was taking far too much time, so I dropped it for now - NB. Setting music volume may not work on some sound cards/configurations)
+					<li>Unit info screen now shows where spell effects reduce stats by fading out negated icons, e.g. Black Prayer, or Life creatures under Darkness/Cloud of Shadow/Eternal Night
+					<li>You can now view the details of all combat damage calculations by clicking the calculator button in combat (NB. The font is quite small to fit all the info in, so you might need to use full screen to view it, however I mainly added this so I can debug the damage calculations rather than being I expect people to read it all)
+				</ul> <b>Minor new features:</b>
+				<ul>
+					<li>+ To Block has been added to the unit info screen, and works correctly - there's very few places this stat gets modified (e.g. High Prayer), but since its so similar to + To Hit I felt it should be displayed in the same way
+					<li>Experience now increases Thrown and Breath attacks (Barbarians, Draconians and various Heroes)
+					<li>Mithril and Adamantium weapons now increase Barbarian's thrown attacks
+					<li>The effect of node auras (giving +2 stats to creatures of the same magic realm) now extend out past the node itself (I didn't realise until reading the strategy guide that the +2 stats effect worked like this)
+					<li>Chaos Channeled units now get the +2 bonuses from Chaos node auras
+					<li>Node auras now grant +2 to breath attacks (Hell Hounds, Great/Sky Drakes, Chaos Channeled Draconians, etc.), Doom Gaze (Chaos Spawn) and Thrown weapons (Chaos Channeled Barbarians)
+					<li>Overland enchantments that exhibit combat area effects now show up on the combat screen (Holy Arms, Crusade, Charm of Life, Eternal Night, Zombie Mastery and Chaos Surge)
+					<li>All the labels and captions during joining a game, choosing a wizard, picks, spells, race and so on, plus the row of buttons across the top of the main map screen, are now all multi-language capable
+					<li>You can now right click on combat area effects (like Chaos Node Aura, or Prayer) to get help text about them
+					<li>Power of immolation is now specified per unit, so e.g. Doom Bat Immolation now appears as power 4
+					<li>Now displays proper ½ symbols instead of 1/2 (in many places)
+					<li>A number of additional fonts have been extended to include characters right up to 255, so that all accented characters are allowed
+					<li>Registry values that are common to all users are now stored under HKEY_LOCAL_MACHINE, thereby allowing multi-user installations work correctly (thanks to Valis for raising this)
+				</ul> <b>Fixed bugs/ommissions:</b>
+				<ul>
+					<li>Now rechecks whether to enable/disable Buy building/unit button when changing current construction project - previously if you clicked Next Turn and then opened up the city screen while the server was still handling the AI players' turns then the 'gold coins' showing how much production you've put into the current construction project would update, but the Rush Buy button could end up disabled when it should be enabled, or enabled when it should be disabled
+					<li>Units with flight or Chaos Channels flight cast on them are now animated as flying units in combat, which previously only worked for units who have flight naturally
+					<li>The strength of monsters inhabiting lairs, nodes and towers used to default to incorrect values if difficulty level was set to Custom
+					<li>Help text scroll for combat-only summoning spells like Phantom Warriors or Fire Elementals no longer shows upkeep values
+					<li>If another player casts a city enchantment on a city while you're looking at it, it now shows you the new enchantment immediately (previously you could only see it if you closed down the city screen and re-opened it)
+					<li>If another player casts a unit enchantment on a unit while you're looking at it, it now shows you the new enchantment immediately (previously you could only see it if you closed down the unit info screen and re-opened it)
+					<li>Spell book now won't display empty pages (previously this would happen if e.g. you had spells of that type, but none applicable to overland, e.g. a wizard whose only summoning spell was Phantom Warriors would still have an empty 'Summoning Spells' page in their Overland spell book - I know, bad example because everyone can summon Magic Spirits)
+					<li>Fixed problem where spells wouldn't appear in your spellbook if you could cast them for 0 MP due to having a really high number of spell books (17 or more spell books, with the default settings); their help text would also appear wrong and is now fixed
+					<li>Fixed bug which would do nasty things if two players cast the same unit or city spell in the same turn
+					<li>Fixed incorrect grouping of icons on unit info screen if unit had attributes from multiple sources (e.g. some melee attack strength from base stats, some from experience, some from Might hero skill)
+					<li>Fixed one major cause of the client always crashing when you try to close it (I still get crashes on closing the client and server, but only sometimes, I believe this has fixed say 70% of them)
+				</ul> <b>Changes with no visible effect on the game:</b>
+				<ul>
+					<li>Because of the registry changes above, you now need Admin rights to install MoM IME
+					<li>All images of ranged attacks in combats are now loaded dynamically from the graphics XML file
+					<li>Production icons (e.g. on the city and unit info screens) and overland enchantment spells now support animation (not used yet until such time as someone draws animated versions of these images, however it standardized and simplified the code to allow it)
+					<li>Combat Area Effect icons (e.g. Node auras or Prayer icon) on the combat screen have been moved to the graphics XML file and now support animation
+					<li>Entries in the Language XML files can now be stored in a nested object structure rather than all at a single flat level, which makes certain entries much easier to work with and was necessary for some of the other changes in this version
+					<li>Improved method of deriving coordinates back from a map grid cell - this is used in a number of places, and now works much faster and cleaner
+					<li>Now creates a player for the Monsters inhabiting lairs/nodes/towers, previously these had a nil/null player object, but I realised this had to change to allow them to cast spells, e.g. Arch Angels to cast Prayer - this has no visible effect on the game
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.8.8</td>
+			<td align=left>8 July 2006</td>
+			<td align=left><ul>
+					<li>You can now cast (and cancel) City and Unit enchantments, however the only ones which currently have any effect are the movement-type Unit spells, i.e. Water Walking, Path Finding, Flight, Wind Walking, Chaos Channels (if you get flight) and Wraith Form
+					<li>Heroes now show with their portrait on the unit info screen
+					<li>Heroes now get their correct names and random skill picks, and can be renamed if you wish (via the unit info screen)
+					<li>Heroes with the Caster skill now have their correct amount of Mana
+					<li>You can now only get one of each Hero, it remembers heroes who you have previously had and have died, and dismissing and re-summoning heroes all works correctly
+					<li>Agility, Arcane Power, Blademaster, Constitution and Might hero skills (and their super versions) now work correctly
+					<li>New Turn Messages (e.g. city growth, finishing constructing buildings and units, and notification of wizards casting overland enchantments) have been totally rewritten to be built and sent in a single block - some now have to be actioned (e.g. if you need to pick a target for a City or Unit Enchantment) before you can proceed with your turn
+					<li>Any additional New Turn Messages that show up during the turn (e.g. another wizard taking one of your nodes) will be added to the existing list, which can be viewed again using the new Messages button - the button will light up to let you know there are new notifications, also any notifications that show up during a turn will be kept and still viewable the following turn
+					<li>You can now get context sensitive help by right clicking on Unit Skills
+					<li>Tweaked drawing of units on the overland map somewhat to improve performance - I now get a frame rate 30% faster than with 0.8.7
+					<li>AI Wizards now show with their proper (language dependant) names
+					<li>The Info button has been changed to a smaller square button, next to the zoom in/out buttons, to make space for the new Msgs button
+					<li>If units die in combat, the fact that they're no longer using up gold/rations/mana is now shown immediately in the per turn totals
+					<li>All unit graphics are now configurable in the graphics XML file, including all combat animations, and are loaded in on the fly - a couple of side effects of this, a) the client now loads up slightly faster since it doesn't have over 3,000 animations to generate and b) you can now add your own units completely from scratch... even entire new races
+					<li>All building graphics, and everything else in the city view display (the landscape, river, mountains, etc.) are all now configurable in the graphics XML file - a couple of side effects of this, a) the client now loads up slightly faster since it doesn't immediately load in all the building graphics, however you get a few seconds delay the first time you open up a city screen, and b) you can now add new buildings from scratch
+					<li>The above change also means that you now see hills and mountains in the background of the city view for cities next to hills and mountains
+					<li>You can now sell city walls
+					<li>Unit overland icons, summoning images and unit skill icons now partially support animation (none of which are used yet until such time as someone draws animated versions of these images, however it standardized and simplified the code to allow it)
+					<li>Merging and Caster skill (for units) now show with the correct colour icon (they're wrong in the original MoM)
+					<li>Corrected path finding skill to allow movement at 1/2 MP per tile instead of 1 MP (half the help text in the original MoM says 1/2 MP and half says 1 MP!)
+					<li>You can now use Game Names up to 100 characters long
+					<li>Several fonts have been extended to include characters right up to 255, so that all accented characters are allowed (some fonts have not yet been changed still remain that don't support accents, these will still give the same 'Requested character XXX of a font which only supports characters 32 thru XXX' error)
+					<li>There is now a French language XML file. It is still incomplete, but its a good start. This has been partially extracted from the LBX files from the French version of the original MoM, and partially been translated by Aggelon, so thanks very much to him for his work on this!
+					<li>All buildings on the map are now stored in a single list instead of one list per map cell to simplify a number of nasty bits of code dealing with complicated thread locking orders
+					<li>Increased the maximum starting gold you can set from 200 to 500 (makes it easier to rush buy buildings when I'm testing!)
+					<li>Server now reports its IP address when starting up
+					<li>Fixed selling buildings in a one-player-at-a-time game
+					<li>Fixed one cause of Access Violation errors when the client is closed... however I've also reinstanted a large amount of code allowing 2D/3D graphics to be overlayed (for another project other than MoM IME)... I know there are tons of bugs which while they should not have any affect during play, have probably introduced a dozen more new ways for the client to crash when you try to close it!
+					<li>Fixed 'Floating point division by zero' errors which occurred when moving the mouse over the client window when it was not the application with focus
+					<li>Fixed a thread locking order bug to do with checking sufficient production
+					<li>Stops you from using player names over 100 characters long, previously this would crash the game
+					<li>Editors now allow references to other XML files (without this, editing the graphics XML file was extremely difficult and confusing)
+					<li>Editors now ask for the names of the XML files to edit when starting up, so its possible to edit e.g. multiple language XML files
+					<li>Renamed the XML files in preparation for providing multiple versions of each to choose between
+					<li>(Warning) If you create a game with zero human players, since there is no way for the game to end, the Server will just loop
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.8.7</td>
+			<td align=left>24 Apr 2006</td>
+			<td align=left><ul>
+					<li>All movement types over all terrain now calculate movement points correctly on the overland map, so e.g. Magic Spirits can now move over water and Draconians now fly at the correct speed
+					<li>Magic Spirits and Guardian Spirits can now capture nodes
+					<li>Server now decides as part of generating the map which squares a node's aura covers, and makes sure nodes are sufficiently far apart from each other so that their auras don't collide
+					<li>AI Wizards will now make sensible choices for their free spells at the start of the game and research spells (but you can only tell this is happening by running the debug version and looking at the log file since they will not yet cast any spells)
+					<li>Overland enchantments now show up on the magic screen and so can be switched off
+					<li>Now stops you casting the same overland enchantment twice
+					<li>Overland enchantments on the new turn messages and spell casting queue screens are now drawn in the 'mirror' of the players' colour
+					<li>You can now get context sensitive help by right clicking on Retorts, Races and Spells
+					<li>Server now shows more info about each game in the grid (map size, turn system, combat scale and which XML database is being used)
+					<li>Installation now registers the MoMIME 'protocol', which means you can connect to my server (if it is switched on and and has MoM IME running on it at the time) to join games running there by clicking <a href="momime://implode.no-ip.org">here</a>
+					<li>Terrain smoothing for mountains, hills, desert and tundra now run on the client and are entirely driven from the graphics XML file, which will be necessary to get spells like Change Terrain and Raise Volcano which alter the map terrain to work
+					<li>Path Finding skill now appears correctly (on Nomad Rangers, plus the Huntress and Ranger heroes)
+					<li>All skill and movement icons are now defined in the graphics XML file
+					<li>Changed the order that things happen when you click End Turn, now it checks for armies starving BEFORE cities grow in size - this prevents the situation that used to happens when sometimes a city would grow in size and cause armies to starve without any warning
+					<li>Fixed problem with setting mana/skill/research ratios that the server sometimes reported that the values did not add up to 100%
+					<li>Fixed problems with using custom wizard photos
+					<li>Made a number of speed improvements to the way list boxes are drawn (affects the list of skills on the unit info and change construction screens, and the building and unit lists on the change construction screen)
+					<li>All pending movements are now drawn with the boot icon, the same as in the original Master of Magic. I had tried to show e.g. wings for flying units, but this became impossible when you have to consider stacks of units with different movement skills. e.g. if you have a stack of some cavalry (walking), Sprites (flying) and a Magic Spirit (moves non-corporeally), what icon should you show for movement? Similarly I've got rid of the icon on the right hand side that used to show the type of movement for the selected unit stack.
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.8.6.1</td>
+			<td align=left>14 Mar 2006</td>
+			<td align=left><ul>
+					<li>All server windows now appear in the centre of the screen, so that in low screen resolutions they don't appear off the screen
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.8.6</td>
+			<td align=left>11 Mar 2006</td>
+			<td align=left><ul>
+					<li>Rewritten map drawing in the client to be much faster - used to run at 5.5 frames per second on my PC, now runs at 15.0 frames per second so runs nearly 3x faster
+					<li>By specifying /fps as a parameter to the client, it will now display the current frames per second on the main map screen
+					<li>Added Chat button for sending messages to other players in the game
+					<li>The images of the map button bar buttons (Game, Spells, Armies, Cities, etc.) are now generated from text, so that they can be made multi-language capable later on
+					<li>Fixed a major cause of instability in the client, particularly when closing it (Notification routine checking e.g. Button.NormalImage.ListEntry after the images had been freed)
+					<li>Fixed a thread locking order problem in the server when ending turn with pending movements
+					<li>City population updates are now sent in a single message to avoid the previous flood of messages during a new turn or a tax rate change (this was necessary as part of rewriting the map drawing)
+					<li>Added loads more debug messages around setting up the New Game form to help try to track down a mysterious bug (affects the debug version only)
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.8.5</td>
+			<td align=left>20 Feb 2006</td>
+			<td align=left><ul>
+					<li>You now get to pick free spells at the start of the game if you have sufficient spell books
+					<li>Artificer now grants the Enchant Item and Create Artifact spells
+					<li>You can now research spells correctly
+					<li>Overland monster summoning spells all work correctly
+					<li>Summon Hero, Summon Champion and Incarnation work somewhat (you can get more than one of the same hero, and they don't get many of the special attributes yet)
+					<li>Overland enchantments can be cast and you have to pay their maintenance, but none of them have any effect yet
+					<li>You can now disband units
+					<li>You can now sell buildings
+					<li>Server will now kill off units, sell buildings or switch off spells if you aren't producing enough rations/gold/mana to support them (it should be impossible to see this happen yet, see next item)
+					<li>You cannot hit End Turn if you have insufficient resources - it will show resource icons on the Next Turn button for the types of resource you don't have enough of
+					<li>You cannot hit End Turn if you are producing research points, have any unresearched spells, and have not chosen one to research
+					<li>Settlers building cities will now immediately show the effect on global production (the settlers are no longer eating rations or cost any gold)
+					<li>Fixed error in combat if you tried to manually control units (putting them on Auto worked fine)
+					<li>In 0.8.4, all cities increased population and constructed buildings/units at twice the rate they should! Fixed
+					<li>Fixed crash if you tried to select garrisoned units from the city screen
+					<li>Fixed error in a simultaneous turns game if with the "You have found a node/lair/tower" window up, you click behind it on the scheduled combats scroll
+					<li>Fixed bug that prevented ranged attacks from gaining the +1 bonus from Mithril or +2 bonus from Adamantium weapons
+					<li>Fixed server stopping players from choosing a Custom wizard if the Custom Spell Picks option is off
+					<li>Fixed cancelling settlers from building a city in a simultaneous turns game
+					<li>Moved more graphics out from the main server database into the new graphics XML file
+					<li>Server now logs TCP/IP socket errors - this is mainly so that you get a visible error when the server cannot listen on the port that it needs (e.g. if you run two copies of the server)
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.8.4</td>
+			<td align=left>24 Dec 2005</td>
+			<td align=left><ul>
+					<li>Now calculates and keeps track of all types of production (gold, rations, research, etc).
+					<li>Added magic screen, allowing setting magic power distribution into mana, research and skill improvement
+					<li>Now keeps track of wizards' casting skills and spending magic power to improve casting skill works correctly
+					<li>Alchemy button works for converting mana to gold or vice versa
+					<li>Alchemy, Mana focusing and Archmage (skill bonuses only) retorts now work correctly
+					<li>You now get your starting 25, 50, 75 or 100 gold as appropriate for the chosen skill level
+					<li>Can now rush buy buildings and units
+					<li>AI players will now set the number of farmers and workers in each of their cities correctly
+					<li>Now sets the number of farmers correctly in human players' initial cities
+					<li>Started separate graphics XML file for the client allowing graphics to be customized separately on each client
+					<li>Map drawing is now a little faster, since the game no longer maintains a separate list of the units at every map location - it is faster than 0.8.3 but still pretty bad
+					<li>Multiplayer components now handle players leaving a game or disconnecting mostly correctly (still a few bugs to work out though, it is not perfect)
+					<li>Fixed error when trying to join a game with the "Only one Human player is allowed to use each Wizard" option set
+					<li>Fixed using custom wizards
+					<li>Fixed the Wizards advisor (F9 key)
+					<li>Fixed changing the number of farmers/workers in a city
+					<li>Fixed changing tax rate
+					<li>Fixed using settlers to build cities
+					<li>Fixed surveyor panel being hidden by the global economy panel
+					<li>Fixed bug that would allow rebels to keep harvesting food if farmers were changed into rebels by raising tax rate
+					<li>Fixed error trying to draw the scheduled combats scroll in a simultaneous turns game
+					<li>Stopped city populations making their first step of growth before turn 1
+					<li>Fixed server leaving blank row at the top of the list of running games
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.8.3</td>
+			<td align=left>22 Nov 2005</td>
+			<td align=left>0.8.3 was a stability fixing release with no actual new features/changes to game play:
+				<ul>
+					<li>Removed DirectPlay entirely and replaced by my own multiplayer components based directly on TCP/IP sockets.
+					<li>Added in thread locking module that automatically detects when protected objects are locked in the wrong order so that incorrect thread locking errors are ALWAYS trapped and give a useful error message, rather than previously they were only sometimes trapped (sometimes they simply crashed out the program altogether) and often the error didn't make it very easy to locate the problem. Since this module now enforces protected objects being locked in a pre-defined order, thread deadlocks should now be impossible.
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td align=left>0.8.2</td>
+			<td align=left>31 July 2005</td>
+			<td align=left><ul>
+					<li>I've done a lot of work to fix the stability of the client - it now seems to randomly exit or give Access Violation errors much less now (it does however still often give errors when you close it, I'm not too bothered about these, also I've noticed it seems to be much less stable when running the Server &amp; Client on different PCs)
+					<li>Added music
+					<li>Added turn/year counter
+					<li>Nodes auras now give +2 to various stats to creatures of the same magic realm (Nodes dispelling effect also appears but has no effect yet)
+					<li>On even numbered turns, you're now prompted to move units in reverse order, so the first unit to move is the last unit that moved last turn (this is how the original MoM works)
+					<li>Unit status bars on the overland map and city screens now show the unit's health
+					<li>The map always used to be drawn in the background even when a combat was in progress - this has been fixed so combat now looks a lot smoother
+					<li>Fixed a bug whereby the client would prompt you to move the faster units in a stack if the slower units couldn't reach their destination in one turn
+					<li>Fixed a bug whereby the client would think units had some spare movement left after a long move (one which took more than 1 turn) when in fact they shouldn't be able to move
+					<li>Fixed a bug whereby the next turn button would sometimes become disabled
+					<li>In a simultaneous movement game, if you have two (or more) unit stacks attack the same node/lair/tower in the same turn and you win the combat with the first stack, the second stack will no longer try to attack the first stack that's now taken over the node/lair/tower
+					<li>Changed the code that decides which image to draw for a city (i.e. with or without walls &amp; what size) to be faster and more stable [Done by SWB]
+					<li>It now selects TCP/IP using a GUID rather than the service provider name, this allows the game to work on non-English versions of Windows (thanks to everyone who let me know about this)
+					<li>Improved handling of another player leaving the game and the game ending, so when a player leaves in a multiplayer game it shouldn't crash the client quite so badly
+					<li>The global economy panel (showing how many rations, gold and magic power you are gaining/losing each turn) now appears at the correct times - although it currently doesn't do or show anything useful
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.8.1</td>
+			<td align=left>12 June 2005</td>
+			<td align=left><ul>
+					<li>Unit experience now works and gives proper bonuses; Fighters' Guilds, War Colleges and the Warlord pick all work correctly
+					<li>Magical weapons (from Alchemists' Guild or Alchemy pick), Mithril weapons and Adamantium weapons now all work correctly
+					<li>+ To Hit now appears on the Unit Info screen as an attribute rather than a regular skill, so that you can see what is giving the + to hit (base unit attribute, experience or magic weapons)
+					<li>The 'New Turn Messages' scroll will now cover up the window asking if you want to want to attack a node/lair/tower, so that you have to deal with new turn messages first
+					<li>The Next Turn, Done, Wait, Patrol and Build buttons are now hidden while units are moving which helps prevent some odd situations which used to be caused by clicking buttons too many turns ahead
+					<li>Rewritten the code for uploading graphics into Direct 3D - this now uses less memory, is more stable, and runs fine in 16 bit colour modes
+					<li>Shadows now look correct, i.e. they are partially transparent rather than opaque
+					<li>The Database XML file now has a tag inside it indicating the version number of MoM IME that this XML file is part of - this prevents using incompatible databases from older/newer versions that could potentially crash the game
+					<li>The Client graphics file now has values inside it indicating the version number of MoM IME that this file is part of - this prevents using incompatible graphics from older/newer versions that could potentially crash the game
+					<li>Server now allows you to choose the XML file to use for each game - this prevents having to specify the name of the XML file on the command line
+					<li>Both client and server now default to using mutexes instead of critical sections, so now no command line options are needed
+					<li>Fixed a couple of memory overflow bugs in the Client that may have been causing some of the crashes
+					<li>The Server now shows the version number on the main form
+					<li>Fixed bug which would often crash the game if another player attacked a node/lair/tower
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.8.0</td>
+			<td align=left>27 May 2005</td>
+			<td align=left><ul>
+					<li>You can now attack monsters in lairs, nodes and towers and the combat all works correctly, although you don't get any treasure for it
+					<li>You can now only build units that you have the necessary buildings for (e.g. you can't build Cavalry until you have a Stables) [Done by SWB]
+					<li>Plus to Hit skill and limited ranged ammunition (e.g. Arrows) now appear correctly on unit info, and also work correctly in combat
+					<li>Casters with ranged attacks (Djinn and Efreets) can correctly spend 3 mana to fire a ranged magical attack
+					<li>By capturing Towers of Wizardry, units can now shift between planes
+					<li>Unit info screen will show the correct number of figures that the unit has left alive at the correct scale in the animation in the top left corner
+					<li>The units in the list box showing all the units you can build in a city are now drawn with the correct number of figures at the correct scale
+					<li>When constructing a unit at a city, the picture of the unit being built next to the production 'coins' now has the correct number of figures at the correct scale
+					<li>Unit skills (e.g. Plus to Hit, Fire Immunity, Forester) now have a comment next to them if they do not yet work correctly
+					<li>Combat scheduler done, so in a simultaneous turns game all players play out combats simultaneously after all units have finished moving
+					<li>Units now heal 1 hit point of damage at the end of each turn
+					<li>Improved the efficiency of the map drawing routine which makes the game run much smoother
+					<li>Added in a lot of missing unit pre-requisites which were missing from the data extracted from the original game
+					<li>Revised thread locking model for the map which has considerably simplified a lot of the code
+					<li>Map coordinates now have range protection, to help in finding bugs to do with incorrect coordinates
+					<li>Server now doesn't send details of monsters inhabiting lairs, nodes and so on to client until the player has visited (scouted) the square
+					<li>Fixed bug in simultaneous turns games where after you click Next Turn, if waiting for other players, the next turn button was still visible
+					<li>Fixed movement bug which left units in the wrong place on the server if the units could not reach their intended destination in 1 turn
+					<li>Fixed some code which always made the server throw an Invalid Typecast exception when closing down
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.7.0</td>
+			<td align=left>16 Mar 2005</td>
+			<td align=left><ul>
+					<li>You can now zoom the map in and out between 1x and 2x zoomed in steps of 10% (11 different zoom levels)
+					<li>You can now build units
+					<li>You now get your starting spearmen + swordmen at the start of the game
+					<li>You can now move units around the map (note there is no combat, so you can move onto enemy units/cities and nothing happens)
+					<li>Settlers can build new cities
+					<li>Unit Info screen added
+					<li>Lairs, Dungeons, Abandoned Keeps and so on are now considered different map feature types and are now filled with monsters
+					<li>Nodes are now filled with monsters
+					<li>Node auras are now the correct size on Weak or Powerful nodes according to the Strategy Guide
+					<li>Server New Game form rearranged somewhat to better organize fields related to populating nodes and lairs with monsters
+					<li>City screen has been redrawn to accomodate larger civilian icons and to show what is currently being constructed
+					<li>Upkeep/production icons (gold coins, food bags, anvils and so on) have all been redrawn 50% larger
+					<li>Fixed thread deadlock which sometimes happened when you tried to switch civilians between farmers and workers
+					<li>Both client and server now include a command line option to make the game use Mutexes instead of Critical Sections for thread locking. If there is a thread deadlock and it is set to use Mutexes with a specified timeout, it will be able to pop up a message saying exactly what caused the thread deadlock. The shortcuts created by the installation program will switch on Mutex by default with a timeout value of 20 seconds.
+					<li>Now using a different installation engine which means that the distribution is only a single file and it has a proper uninstallation option in Add/Remove Programs in Control Panel
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.6.0</td>
+			<td align=left>30 Nov 2004</td>
+			<td align=left><ul>
+					<li>You can now build buildings in your initial city - all building pre-requisites and racial limitations work correctly
+					<li>AI Wizards and Raiders will also build buildings in their cities
+					<li>You can see the buildings that have been built in each city on the city screen
+					<li>Wizards' initial cities now start with the correct starting buildings (Barracks, Smithy, etc.)
+					<li>Calculations for Mana &amp; Research are now 100% correct, including effects of Miners' Guild, Divine/Infernal Power and Dwarves
+					<li>Calculations for Max City Size, Growth rate, Minimum Farmers &amp; Rations are now 100% correct, including effects of Granary, Farmers' Market, Foresters' and Animsts' Guilds
+					<li>Calculation for Production is now 100%, including effects of surrounding terrain, Sawmill, Foresters', Miners' and Mechanicians' Guilds
+					<li>Calculation for Gold is correct other than that you cannot get the % trade bonus due to roads and hence Nomad bonus does not work either
+					<li>Unrest reduction from buildings now works correctly, with Divine and Infernal Power improving the effect of religious buildings
+					<li>Cities with more population than food production now die at the correct rate per turn
+					<li>You can now view the maximum population calculation from the city screen as well as the growth rate calculation
+					<li>At the start of the turn you are now told about any cities which gained or lost people across a 1,000 boundary
+					<li>Buy and Change buttons as well as current production will not appear when you look at cities which belong to someone else
+					<li>You can now see which cities have city walls and which don't on the map
+					<li>The calculation box now has scroll arrows for viewing very long calculations (like the Gold calculation for a city with a large number of buildings)
+					<li>Server now stops clients from setting invalid tax rates
+					<li>Both Client and Server now handle exceptions within DirectPlay better, should make Server handle players leaving better
+					<li>Client now autodetects if your graphics card does not handle non-power-of-two size textures and compensates
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.5.0</td>
+			<td align=left>6 Nov 2004</td>
+			<td align=left><ul>
+					<li>All initial Wizard and Raider cities placed with correct starting races and populations
+					<li>Added city screen (although other players' cities currently use the same screen)
+					<li>Minimum number of Farmers, number of Rebels from taxes, switching between farmers and workers all works correctly
+					<li>City growth calculations work correctly - so cities grow each time you click Next Turn
+					<li>You can view any of the calculations (e.g. try clicking on the line of text about the population, or the food or production icons)
+					<li>Bonuses from nearby map features work correctly (e.g. Gems, Wild Game)
+					<li>Redid gold, power &amp; rations from map features (e.g. Gems, Wild Game) to be generic - you could now alter e.g. Crysx crystals to give +5 spell research
+					<li>On the Wizards screen, the Gems are now shown in each wizard's colour
+					<li>You can now use function keys F1 thru to F9 as shortcuts to the various Advisors, same as in the original Master of Magic
+					<li>You can now set your tax rate and this affects gold production and unrest correctly
+					<li>Increased food from Sorcery &amp; Nature nodes as per the Strategy Guide (which explicitly says the Surveyor in the original MoM is wrong)
+					<li>Wild Game now adds +2 to city size as per the Strategy Guide, +2 food bonus shows up separately when examining Wild Game tile
+					<li>Created new document to list differences from the original Master of Magic and an FAQ
+					<li>Direct3D errors now shown in dialog box before error is thrown - previously on some PCs, never got to read the error message
+					<li>Client now autodetects if your graphics card does not support hardware vertex processing and will resort to software emulation
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.4.0</td>
+			<td align=left>18 Oct 2004</td>
+			<td align=left><ul>
+					<li>Added AI Wizard players
+					<li>Added special AI player for Raiders
+					<li>Add flag colours - pre-defined Wizards have pre-assigned flag colours, custom portraits defined flag colour in R/G/B components
+					<li>Added option to choose turn based system (sequential or simultaneous movement) - Next Turn button works correctly with this
+					<li>Added 'colour patch' indicator to show the turn sequence and whether each player is a Human or AI player
+					<li>Added surveyor, displays all tile and feature bonuses correctly
+					<li>Surveyor correctly calculates city maximum population, production bonus and gold bonus
+					<li>Added new game option to prevent two players from choosing the same wizard
+					<li>AI Wizards and Raiders all play out their turns in separate threads (which currently do nothing... but the framework is in place)
+					<li>Doubled size of right hand panel on map view so that text is big enough to read when using e.g. Surveyor
+					<li>Defined standard colours for all the pre-defined Wizards, plus Raiders - colours show when choosing Wizard or portrait
+					<li>Intro difficulty level now prohibits making custom picks, same as in the original Master of Magic
+					<li>Myrran race buttons now have a proper disabled appearance when you don't have the Myrran retort pick
+					<li>Initial area of the map you're left looking at when game first starts is now correct instead of sometimes being blackness
+					<li>Fixed bug whereby books did not appear on the 5 magic realm bookshelves on the Custom Picks screen
+					<li>Fixed column widths in Join Game screen so that can see Map Size column
+					<li>Fixed original/caption label on server New Game form on the Map Features tab
+					<li>Fixed multi-language code to not bomb out with a variant exception if a value is missing from a language file
+					<li>Fixed image drawing so textures line up perfectly with pixel boundaries
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.3.0</td>
+			<td align=left>03 Oct 2004</td>
+			<td align=left><ul>
+					<li>Shows each pre-defined wizard's spell books and retorts when choosing a wizard
+					<li>Added screen to select picks for custom wizards, all pre-requisites work correctly
+					<li>Added screen to select race, requiring Myrran retort for Myrran races works correctly
+					<li>Custom picks get sent to server, which verifies these and informs other players which picks you chose
+					<li>If player chooses a local BMP file as their Wizard picture this now gets sent around to all the other players
+					<li>Add 'Wizards' screen from Info menu, a combination of the Mirror screen and part of the Magic screen from the original MoM
+					<li>Players joining game are now told which Wizards players who are already in the game have chosen
+					<li>Server will now terminate game if a player leaves after a game has properly started up
+					<li>Book magic realm names, bookshelf titles, retort names, plane names and race names all multi-language capable
+					<li>Remembers last server name and player name used in registry
+					<li>Altered image handling to not keep Windows bitmap handles for textures already uploaded into Direct 3D
+					<li>Textures in .ndgtex files are now compressed by around 70-80%
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.2.0</td>
+			<td align=left>19 Sept 2004</td>
+			<td align=left><ul>
+					<li>Seperate Client and Server modules
+					<li>Map generator customizable, e.g. can make different size maps or pick which direction(s) the map wraps in
+					<li>Added minerals onto map, e.g. Gems, Gold, Iron
+					<li>Added nodes and lairs onto map
+					<li>Added main menu, screen for locating a Server game, selecting a Wizard, and informing other players which Wizard you chose
+					<li>When choosing the picture for a custom wizard, you can choose a local BMP file (ideal size is 218x250)
+					<li>Created customizable XML data file for server module
+					<li>Correctly handles setting number of players who must join the game and preventing too many players from joining
+					<li>Waits for correct number of playes to join game before starting
+					<li>Multi-language capability for game data (e.g. Wizard/Unit/Building/Terrain/Spell names)
+					<li>Option to choose between multiple language files
+					<li>Reads various fonts directly from original FONTS.LBX file for use on all the screens and menus
+				</ul></td>
+		</tr>
+		<tr>
+			<td align=left>0.1.0</td>
+			<td align=left>31 Aug 2004</td>
+			<td align=left><ul>
+					<li>Demo of Map Generator only - land, hills, mountains, desert, swamp, tundra, rivers, towers of wizardry all working
+					<li>Animated shoreline tiles
+					<li>Alt-Enter to switch between windowed and full screen mode
+				</ul></td>
+		</tr>
+	</table>
+</BODY>
+</HTML>

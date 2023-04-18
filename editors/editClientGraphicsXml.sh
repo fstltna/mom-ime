@@ -1,0 +1,1 @@
+java -Xmx1024m -classpath ../lib/momime-editors-0.9.9.7.jar:$(cat ../lib/classpaths/editors-classpath-unix.txt) momime.editors.client.graphics.GraphicsEditor
